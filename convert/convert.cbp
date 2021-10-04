@@ -31,6 +31,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="argumentparser.h" />
+		<Unit filename="baseconverter.h" />
 		<Unit filename="convert.c">
 			<Option compilerVar="CC" />
 		</Unit>
