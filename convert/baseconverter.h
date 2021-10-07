@@ -1,22 +1,22 @@
 #include<math.h>
 
-void encode(int* num, char* toReturn) {
-     switch(*num) {
-    case 97 ... 102:    *toReturn += 32;
-    case 65 ... 70:     *toReturn += 7;
+void digitChar(int* num, char* toReturn) {
+    switch(*num) {
+    case 10 ... 15:     *toReturn = *num + 55;
+    case 0 ... 9:   *toReturn = *num + 48;
         break;
     default:
-        case 0 ... 9:     *toReturn += 48;
+        *toReturn = 0;
     }
 }
-
-void decode(char* num, int* digInt) {
+//digitValue(char c) y digitChar(int i)
+void digitValue(char* num, int* digInt) {
     switch(*num) {
-    case 97 ... 102:    *digInt -= 32;
-    case 65 ... 70:     *digInt -= 7;
+    case 'A' ... 'F':   *digInt = *num - 7;
+    case 48 ... 57: *digInt = *num - 48;
         break;
     default:
-        case 48 ... 57:     *digInt -= 48;
+        *digInt = 0;
     }
 }
 
@@ -31,8 +31,8 @@ int* integerMultiplicationMethod(char* source, int* sourceLenght, int* sourceBas
     *calcAux = 0;
 
     for(*i = 0; *i < *sourceLenght; (*i)++) {
-        decode(&source[*i], digInt);
-        *position = *sourceLenght - (*i + 1);
+        digitValue(&source[*i], digInt);
+        *position = *sourceLenght - (*i + 2);
         *calcAux = *digInt * pow(*sourceBase, *position);
 
         if(*viewArgument == 1) printf("%f + %d * (%d exp %d)", *calcAux, *digInt, *sourceBase, *position);
@@ -63,7 +63,7 @@ char* integerDivisionMethod(int* source, int* sourceLenght, int* destBase, int* 
         if (*viewArgument == 1) printf("%d / %d = %f, rest: %d", *source, *destBase, *quotient, *rest);
 
         *source = *quotient;
-        encode(rest, &toReturn[*i]);
+        digitChar(rest, &toReturn[*i]);
     }
 
     free(i);
@@ -85,7 +85,7 @@ char* fractionMultiplicationMethod(int* source, int* sourceLenght, int* destBase
         *calcAux = (*source / 10) * *destBase;
         toReturn[*i] = trunc(*calcAux);
 
-        if(*viewArgument == 1) printf("0.%d * %d = %d", *source, *destBase, *calcAux);
+        if(*viewArgument == 1) printf("0.%d * %d = %f", *source, *destBase, *calcAux);
 
         *source = *calcAux - trunc(*calcAux);
     }
@@ -103,8 +103,8 @@ int* fractionDivisionMethod(char* source, int* sourceLenght, int* sourceBase, in
     *quotient = 0;
 
     for (*i = 0; *i < *sourceLenght; (*i)++) {
-        *digChar = source[*sourceLenght - (*i + 1)];   //+1 o +2? por el '/0'
-        decode(digChar, digInt);
+        *digChar = source[*sourceLenght - (*i + 2)];   //+1 o +2? por el '/0'
+        digitValue(digChar, digInt);
         *toReturn = (*quotient + *digInt) / 10;
 
         if (*viewArgument == 1) printf("(%f + %d) / 10 = %d", *quotient, *digInt, *toReturn);
