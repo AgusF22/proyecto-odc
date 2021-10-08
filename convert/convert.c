@@ -68,7 +68,7 @@ int main(int argc, char* argv[]){   // TESTING main
     sourceArgValue = (int*)malloc(sizeof(int));
     destArgValue = (int*)malloc(sizeof(int));
 
-    int* sourceBase10 = (int*)malloc(sizeof(int));
+    long long* sourceBase10 = (long long*)malloc(sizeof(long long));
     char* sourceDest = (char*)malloc(sizeof(char));
 
     printf("******************Start parse arguments test**********************************\n\n");
@@ -83,10 +83,10 @@ int main(int argc, char* argv[]){   // TESTING main
     //TESTING INTEGER METHODS
 
     printf("******************Start integer multiplication method test**********************************\n\n");
-    int leng = strlen(numberArgIntegerValue);
-    sourceBase10 = integerMultiplicationMethod(numberArgIntegerValue, &leng , sourceArgValue, viewArgPresent);
 
-    printf("num en 10 = %d \n", *sourceBase10);
+    sourceBase10 = integerMultiplicationMethod(numberArgIntegerValue, sourceArgValue, viewArgPresent);
+
+    printf("num en 10 = %I64d \n", *sourceBase10);
 
     printf("\n********************End integer multiplication method test**********************************\n\n");
 
@@ -96,11 +96,8 @@ int main(int argc, char* argv[]){   // TESTING main
 
     sourceDest = integerDivisionMethod(sourceBase10, destArgValue, viewArgPresent);
 
-    printf("en base %d = ", *destArgValue);
+    printf("en base %d = %s", *destArgValue, sourceDest);
 
-    for(int j=0; sourceDest[j] != '\0'; j++) {
-        printf("%c", sourceDest[j]);
-    }
     printf("\n");
 
     printf("\n********************End integer division method test**********************************\n\n");
