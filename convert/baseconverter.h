@@ -26,21 +26,28 @@ void digitValue(char* num, int* digInt) {
     }
 }
 
-int* integerMultiplicationMethod(char* source, int* sourceLenght, int* sourceBase, int* viewArgument){
+int* integerMultiplicationMethod(const char* nInteger, int* sourceLenght, int* sourceBase, int* viewArgument){
     // metodo de la multiplicacion para enteros (de base sourceBase a base 10)
 
+    char* nIntegerCopy = (char*) malloc(sizeof(char));
     int* toReturn = (int*)malloc(sizeof(int));
     int* i = (int*) malloc(sizeof(int));
     int* digInt = (int*) malloc(sizeof(int));
     int* position = (int*) malloc(sizeof(int));
     double* calcAux = (double*) malloc(sizeof(double));
+
+    for(*i = 0; nInteger[*i] != '\0'; (*i)++){
+        nIntegerCopy[*i] = nInteger[*i];
+    }
+    nIntegerCopy[*i] = '\0';
+
     *toReturn = 0;
     *calcAux =  0;
     *digInt  =  0;
     *position = 0;
 
     for (*i = 0; *i < *sourceLenght; (*i)++) {
-        digitValue(&source[*i], digInt);
+        digitValue(&nIntegerCopy[*i], digInt);
         *position = *sourceLenght - (*i + 1);
         *calcAux += *digInt * pow(*sourceBase, *position);
 
@@ -54,13 +61,15 @@ int* integerMultiplicationMethod(char* source, int* sourceLenght, int* sourceBas
     free(digInt);
     free(position);
     free(calcAux);
+    free(nIntegerCopy);
 
     return toReturn;
 }
 
-char* integerDivisionMethod(int* source, int* destBase, int* viewArgument){
+char* integerDivisionMethod(const int* nInteger, int* destBase, int* viewArgument){
     // metodo de la division para enteros (de base 10 a base destBase)
 
+    int* sourceCopy = (int*) malloc(sizeof(int));
     char* toReturn = (char*)malloc(sizeof(char) * 10);
     char* arrayAux = (char*)malloc(sizeof(char) * 10);
     int* i = (int*) malloc(sizeof(int));
@@ -68,22 +77,23 @@ char* integerDivisionMethod(int* source, int* destBase, int* viewArgument){
     float* quotient = (float*) malloc(sizeof(float));
     int* rest = (int*) malloc(sizeof(int));
     *quotient = 0;
+    *sourceCopy = *nInteger;
     *rest = 0;
     *i = 0;
     *j = 0;
 
     do {
-        *quotient = *source / *destBase;
-        *rest = *source % *destBase;
+        *quotient = *sourceCopy / *destBase;
+        *rest = *sourceCopy % *destBase;
 
         digitChar(rest, &arrayAux[*i]);
         if (*viewArgument == 1)
-            printf("%d / %d = %.0f, rest = (%d)10 = (%c)%d\n", *source, *destBase, *quotient, *rest, arrayAux[*i], *destBase);
+            printf("%d / %d = %.0f, rest = (%d)10 = (%c)%d\n", *sourceCopy, *destBase, *quotient, *rest, arrayAux[*i], *destBase);
 
-        *source = *quotient;
+        *sourceCopy = *quotient;
     //    digitChar(rest, &arrayAux[*i]);
         (*i)++;
-    } while (*source != 0); //*source >= *destBase
+    } while (*sourceCopy != 0); //*source >= *destBase
 
     //digitChar(source, &arrayAux[*i]); //add last quotient
     //(*i)++;
@@ -112,6 +122,7 @@ char* integerDivisionMethod(int* source, int* destBase, int* viewArgument){
     free(quotient);
     free(rest);
     free(arrayAux);
+    free(sourceCopy);
 
     return toReturn;
 }

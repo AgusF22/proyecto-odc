@@ -79,16 +79,7 @@ int main(int argc, char* argv[]){   // TESTING main
 
     printf("\n********************End parse arguments test**********************************\n\n");
 
-    //Save data from the console
-    char* argIntegerAux = (char*)malloc(sizeof(char));
-    char* argFractionAux = (char*)malloc(sizeof(char));
 
-    printf("\nargIntegerAux: %s -- argFractionAux: %s\n", argIntegerAux, argFractionAux);
-
-    strcpy(argIntegerAux , numberArgIntegerValue);
-    strcpy(argFractionAux , numberArgFractionValue);
-
-    printf("\nargIntegerAux: %s -- argFractionAux: %s\n", argIntegerAux, argFractionAux);
  /*   for (int i = 0; numberArgIntegerValue[i] != '\0'; i++) {
         argIntegerAux[i] = numberArgIntegerValue[i];
     }
@@ -156,7 +147,7 @@ int main(int argc, char* argv[]){   // TESTING main
 
     printf("RESULTADO DE LA CONVERSION: ");
 
-    printf("(%s.%s)%d = ",argIntegerAux,argFractionAux,*sourceArgValue);
+    printf("(%s.%s)%d = ",numberArgIntegerValue,numberArgFractionValue,*sourceArgValue);
     printf("(%s.%s)%d", sourceDest, fracBase10, *destArgValue);
 
     printf("\n\n");
