@@ -124,17 +124,16 @@ char* fractionMultiplicationMethod(float* source, int* destBase, int* viewArgume
     float* calcAux = (float*) malloc(sizeof(float));
     int* truncated = (int*) malloc(sizeof(int));
 
-
     for (*i = 0; *i < 5; (*i)++) {
-        *calcAux = *source * *destBase;
-        *truncated = trunc(*calcAux);
+        *calcAux = (*source) * (*destBase);
+        *truncated = truncf(*calcAux);
         digitChar(truncated, &toReturn[*i]);
 
         if (*viewArgument == 1) {
-            printf("%.5f * %d = %.5f\n", *source, *destBase, *calcAux);
+            printf("%.5f * %d = %.5lf\n", *source, *destBase, *calcAux);
         }
 
-        *source = *calcAux - trunc(*calcAux);
+        *source = *calcAux - truncf(*calcAux);
     }
     toReturn[*i] = '\0';
     return toReturn;
