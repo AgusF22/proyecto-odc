@@ -79,7 +79,7 @@ int main(int argc, char* argv[]){   // TESTING main
 
     printf("\n********************End parse arguments test**********************************\n\n");
 
-    //Save date the console
+    //Save data from the console
     char* argIntegerAux = (char*)malloc(sizeof(char));
     char* argFractionAux = (char*)malloc(sizeof(char));
 
@@ -139,12 +139,8 @@ int main(int argc, char* argv[]){   // TESTING main
 
     fracBase10 = fractionMultiplicationMethod(fracBaseAux, destArgValue, viewArgPresent);
 
-    printf("(%.5f)10 en base %d = ", *fracBaseOrigin, *destArgValue);
+    printf("(%.5f)10 en base %d = 0.%s\n", *fracBaseOrigin, *destArgValue, fracBase10);
 
-    for(int i = 0; fracBase10[i] != '\0'; i++){
-        printf("%c", fracBase10[i]);
-    }
-    printf("\n");
 
     freeAll();
 

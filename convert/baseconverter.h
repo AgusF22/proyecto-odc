@@ -67,7 +67,10 @@ char* integerDivisionMethod(int* source, int* destBase, int* viewArgument){
     int* j = (int*) malloc(sizeof(int));
     float* quotient = (float*) malloc(sizeof(float));
     int* rest = (int*) malloc(sizeof(int));
-    *quotient = 0; *rest = 0; *i = 0;*j = 0;
+    *quotient = 0;
+    *rest = 0;
+    *i = 0;
+    *j = 0;
 
     do {
         *quotient = *source / *destBase;
@@ -120,6 +123,7 @@ char* fractionMultiplicationMethod(float* source, int* destBase, int* viewArgume
     int* i = (int*) malloc(sizeof(int));
     float* calcAux = (float*) malloc(sizeof(float));
     int* truncated = (int*) malloc(sizeof(int));
+
 
     for (*i = 0; *i < 5; (*i)++) {
         *calcAux = *source * *destBase;
