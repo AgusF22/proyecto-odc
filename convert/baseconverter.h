@@ -6,7 +6,7 @@ void digitChar(int* num, char* toReturn) {
     switch (*num) {
     case 10 ... 15:     *toReturn = *num + 55;
         break;
-    case 0 ... 9:   *toReturn = *num + 48;
+    case 0 ... 9:       *toReturn = *num + 48;
         break;
     default:
         *toReturn = 0;
@@ -15,9 +15,11 @@ void digitChar(int* num, char* toReturn) {
 
 void digitValue(char* num, int* digInt) {
     switch (*num) {
-    case 'A' ... 'F':   *digInt = *num - 55;
+    case 'A' ... 'F':
+        *digInt = *num - 55;
         break;
-    case 48 ... 57: *digInt = *num - 48;
+    case 48 ... 57:
+        *digInt = *num - 48;
         break;
     default:
         *digInt = 0;
@@ -34,12 +36,14 @@ int* integerMultiplicationMethod(char* source, int* sourceLenght, int* sourceBas
     double* calcAux = (double*) malloc(sizeof(double));
     *calcAux = 0;
 
-    for(*i = 0; *i < *sourceLenght; (*i)++) {
+    for (*i = 0; *i < *sourceLenght; (*i)++) {
         digitValue(&source[*i], digInt);
         *position = *sourceLenght - (*i + 1);
         *calcAux += *digInt * pow(*sourceBase, *position);
 
-        if(*viewArgument == 1) printf("%d + %d * (%d exp %d) = %.0f\n", *toReturn, *digInt, *sourceBase, *position, *calcAux);
+        if (*viewArgument == 1) {
+            printf("%d + %d * (%d exp %d) = %.0f\n", *toReturn, *digInt, *sourceBase, *position, *calcAux);
+        }
         *toReturn = (int) *calcAux;
     }
 
@@ -79,19 +83,24 @@ char* integerDivisionMethod(int* source, int* destBase, int* viewArgument){
     //(*i)++;
     arrayAux[*i] = '\0';
 
-    while(*i > 0) {
+    while (*i > 0) {
         toReturn[*j] = arrayAux[(*i)-1];
-    /*  #ifdef TESTING
+        #if 0
+        #ifdef TESTING
         printf("array: %c:  --- return: %c\n", arrayAux[*i-1], toReturn[*j]);
-        #endif */
-        (*i)--; (*j)++;
+        #endif // TESTING
+        #endif
+        (*i)--;
+        (*j)++;
     }
     toReturn[*j] = '\0';
 
-/*    #ifdef TESTING
-        for(*i = 0; *i < *j; (*i)++)
-            printf("toReturn: %c\n", toReturn[*i]);
-    #endif */
+    #if 0
+    #ifdef TESTING
+    for(*i = 0; *i < *j; (*i)++)
+        printf("toReturn: %c\n", toReturn[*i]);
+    #endif // TESTING
+    #endif
 
     free(i);
     free(quotient);
@@ -109,12 +118,14 @@ char* fractionMultiplicationMethod(float* source, int* destBase, int* viewArgume
     float* calcAux = (float*) malloc(sizeof(float));
     int* truncated = (int*) malloc(sizeof(int));
 
-    for(*i = 0; *i < 5; (*i)++) {
+    for (*i = 0; *i < 5; (*i)++) {
         *calcAux = *source * *destBase;
         *truncated = trunc(*calcAux);
         digitChar(truncated, &toReturn[*i]);
 
-        if(*viewArgument == 1) printf("%.5f * %d = %.5f\n", *source, *destBase, *calcAux);
+        if (*viewArgument == 1) {
+            printf("%.5f * %d = %.5f\n", *source, *destBase, *calcAux);
+        }
 
         *source = *calcAux - trunc(*calcAux);
     }
@@ -138,7 +149,9 @@ float* fractionDivisionMethod(char* source, int* sourceLenght, int* sourceBase, 
         digitValue(digChar, digInt);
         *quotient = (*quotient + *digInt) / *sourceBase;
 
-        if (*viewArgument == 1) printf("(%.5f + %d) / 10 = %.6f\n", *toReturn, *digInt, *quotient); //TODO redondear o truncar?
+        if (*viewArgument == 1) {
+            printf("(%.5f + %d) / 10 = %.6f\n", *toReturn, *digInt, *quotient); //TODO redondear o truncar?
+        }
         *toReturn = *quotient;
     }
 

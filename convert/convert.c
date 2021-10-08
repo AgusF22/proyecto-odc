@@ -59,7 +59,7 @@ void printArgVarValues(){
     printf("\n");
 }
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[]){   // TESTING main
     helpArgPresent = (int*)malloc(sizeof(int));
     viewArgPresent = (int*)malloc(sizeof(int));
 
@@ -71,60 +71,67 @@ int main(int argc, char* argv[]){
     int* sourceBase10 = (int*)malloc(sizeof(int));
     char* sourceDest = (char*)malloc(sizeof(char));
 
-    parseArguments(&argc, argv);
+    printf("******************Start parse arguments test**********************************\n\n");
 
-    printArgVarValues();
+    parseArguments(&argc, argv);    // Test parseArguments
+
+    printArgVarValues();            // Print arguments
+
+    printf("\n********************End parse arguments test**********************************\n\n");
 
     //Save date the console
     char* argIntegerAux = (char*)malloc(sizeof(char));
     char* argFractionAux = (char*)malloc(sizeof(char));
 
-    for(int i=0; numberArgIntegerValue[i] != '\0'; i++)
+    for (int i = 0; numberArgIntegerValue[i] != '\0'; i++) {
         argIntegerAux[i] = numberArgIntegerValue[i];
+    }
 
-    for(int i=0; numberArgFractionValue[i] != '\0'; i++)
+    for (int i = 0; numberArgFractionValue[i] != '\0'; i++) {
         argFractionAux[i] = numberArgFractionValue[i];
+    }
 
     //TESTING INTEGER METHODS
 
-    printf("Metodo de la multiplicacion de interos:\n");
+    printf("******************Start integer multiplication method test**********************************\n\n");
     int leng = strlen(numberArgIntegerValue);
     sourceBase10 = integerMultiplicationMethod(numberArgIntegerValue, &leng , sourceArgValue, viewArgPresent);
 
-    printf("num en 10: %d ", *sourceBase10);
+    printf("num en 10 = %d \n", *sourceBase10);
 
-    //**************************************************************************************
+    printf("\n********************End integer multiplication method test**********************************\n\n");
 
-    printf("\n\n");
+    /***************************************************************************************************************************************/
 
-    printf("Metodo de la division de enteros:\n");
+    printf("******************Start integer division method test**********************************\n\n");
 
     sourceDest = integerDivisionMethod(sourceBase10, destArgValue, viewArgPresent);
 
-    printf("en base %d: ", *destArgValue);
+    printf("en base %d = ", *destArgValue);
 
-    for(int j=0; sourceDest[j] != '\0'; j++)
+    for(int j=0; sourceDest[j] != '\0'; j++) {
         printf("%c", sourceDest[j]);
+    }
+    printf("\n");
 
-    //**************************************************************************************
-    //TESTING FRACTIONARI METHOD
+    printf("\n********************End integer division method test**********************************\n\n");
 
-    printf("\n\n");
+    /***************************************************************************************************************************************/
 
-    printf("Metodo de la division de fraccionarios:\n");
+    printf("******************Start fractional division method test**********************************\n\n");
 
     float* fracBaseOrigin = (float*)malloc(sizeof(float));
     int lengFrac = strlen(numberArgFractionValue);
 
     fracBaseOrigin = fractionDivisionMethod(numberArgFractionValue, &lengFrac, sourceArgValue, viewArgPresent);
 
-    printf("\nfraccionario a base 10: %.5f", *fracBaseOrigin);
+    printf("fraccionario a base 10 = %.5f\n", *fracBaseOrigin);
 
-    //**************************************************************************************
+    printf("\n********************End fractional division method test**********************************\n\n");
 
-    printf("\n\n");
+    /***************************************************************************************************************************************/
 
-    printf("Metodo de la multiplicacion de fraccionarios:\n");
+    printf("******************Start fractional multiplication method test**********************************\n\n");
 
     char* fracBase10 = (char*)malloc(sizeof(char));
     float* fracBaseAux = (float*)malloc(sizeof(float));
@@ -132,17 +139,18 @@ int main(int argc, char* argv[]){
 
     fracBase10 = fractionMultiplicationMethod(fracBaseAux, destArgValue, viewArgPresent);
 
-    printf("(%.5f)10 en base %d: ", *fracBaseOrigin, *destArgValue);
+    printf("(%.5f)10 en base %d = ", *fracBaseOrigin, *destArgValue);
 
-    for(int i = 0; fracBase10[i] != '\0'; i++)
+    for(int i = 0; fracBase10[i] != '\0'; i++){
         printf("%c", fracBase10[i]);
-
+    }
+    printf("\n");
 
     freeAll();
 
-    printf("\n\n");
+    printf("\n********************End fractional multiplication method test**********************************\n\n");
 
-    //**************************************************************************************
+    /***************************************************************************************************************************************/
 
     printf("RESULTADO DE LA CONVERSION: ");
 
