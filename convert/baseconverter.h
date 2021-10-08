@@ -1,8 +1,6 @@
 #ifndef BASECONVERTER_H
 #define BASECONVERTER_H
 
-#define TESTING
-
 #include<math.h>
 
 void digitChar(int* num, char* toReturn) {

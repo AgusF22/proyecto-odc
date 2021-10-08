@@ -1,8 +1,6 @@
 #ifndef ARGUMENTPARSER_H
 #define ARGUMENTPARSER_H
 
-#define TESTING
-
 extern int* helpArgPresent;
 extern int* viewArgPresent;
 
