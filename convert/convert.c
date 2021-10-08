@@ -1,4 +1,7 @@
 #define TESTING
+#ifdef TESTING
+    #include <string.h>
+#endif // TESTING
 
 #include <stdio.h>
 #include <stdlib.h>
