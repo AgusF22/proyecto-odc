@@ -1,6 +1,7 @@
-#define TESTING
+#ifndef ARGUMENTPARSER_H
+#define ARGUMENTPARSER_H
 
-#include<string.h>
+#define TESTING
 
 extern int* helpArgPresent;
 extern int* viewArgPresent;
@@ -37,6 +38,7 @@ void validateDigit(char* digit, int* base, int* control){
 
     free(code);
     #ifdef TESTING
+    (*control) ? printf("Digit invalid\n") : printf("Digit valid\n");
     printf("End validateDigit\n");
     #endif // TESTING
 }
@@ -51,7 +53,10 @@ void parseN(char* toParseNArg, int* control){
     int* foundPoint = (int*) malloc(sizeof(int));                       // condition for fraction point found
     char* nArg = numberArgIntegerValue;                                 // n argument value storage pointer (to separate integer and fraction parts)
 
-    *length = strlen(toParseNArg);                                      // Calculate to parse string length
+    *length = 0;                                                        // Start with length equal 0
+    while(toParseNArg[*length] != '\0'){                                // Traverse string until null character
+        (*length)++;                                                    // For each non null character, increment the length by one
+    }
     #ifdef TESTING
     printf("toParseN length = %i\n", *length);
     #endif // TESTING
@@ -59,6 +64,9 @@ void parseN(char* toParseNArg, int* control){
     *foundPoint = 0;                                                    // Initialize foundPoint as false
 
     for (*i = 0; *i < *length && *control != EXIT_FAILURE; (*i)++) {    // Traverse all characters or until error
+        #ifdef TESTING
+        printf("nArg = %s\n", nArg);
+        #endif // TESTING
         if(!*foundPoint && toParseNArg[*i] == '.'){                     // If point found
             #ifdef TESTING
             printf("found fractional point\n");
@@ -70,10 +78,10 @@ void parseN(char* toParseNArg, int* control){
             validateDigit(&toParseNArg[*i], sourceArgValue, control);       // Validate character with the source base
             if(*control != EXIT_FAILURE){                                   // If there was no error
                 #ifdef TESTING
-                printf("Store %c\n", toParseNArg[*i]);
+                printf("Store %c in index %i\n", toParseNArg[*i], *counter);
                 #endif // TESTING
                 nArg[(*counter)++] = toParseNArg[*i];                           // Store character
-                nArg[(*counter) + 1] = '\0';                                    // Add null character at the end of the string
+                nArg[(*counter)] = '\0';                                    // Add null character at the end of the string
             }
         }
     }
@@ -108,6 +116,7 @@ void parseArguments(int* argc, char* argv[]){
     int* temp = (int*) malloc(sizeof(int));                             // Variable to store base string to int conversion
     int* control = (int*) malloc(sizeof(int));                          // Error control variable
     char* unparsedN = NULL;                                             // -n argument value variable, starts with null
+    char* argChar;
 
     numberArgIntegerValue[0] = '\0';                                    // by default, n integer part is empty
     numberArgFractionValue[0] = '\0';                                   // by default, n fractional part is empty
@@ -120,7 +129,10 @@ void parseArguments(int* argc, char* argv[]){
         #ifdef TESTING
         printf("Argument %d == %s\n", *i, argv[*i]);
         #endif // TESTING
-        if ( strcmp(argv[*i], "-n") == 0 ){                             // Parse -n argument
+        argChar = &argv[*i][1];
+
+        switch (*argChar) {
+        case 'n':                                                       // Parse -n argument
             #ifdef TESTING
             printf("Enter -n if block (argument == -n)\n");
             #endif // TESTING
@@ -132,7 +144,8 @@ void parseArguments(int* argc, char* argv[]){
                 printf("Missing -n value\n");
             }
             #endif // TESTING
-        } else if (strcmp(argv[*i], "-s") == 0) {                       // Parse -s argument
+            break;
+        case 's':                                                       // Parse -s argument
             #ifdef TESTING
             printf("Enter -s if block (argument == -s)\n");
             #endif // TESTING
@@ -158,7 +171,8 @@ void parseArguments(int* argc, char* argv[]){
                 #endif // TESTING
                 exit(EXIT_FAILURE);
             }
-        } else if (strcmp(argv[*i], "-d") == 0) {                       // Parse -d argument
+            break;
+        case 'd':                                                       // Parse -d argument
             #ifdef TESTING
             printf("Enter -d if block (argument == -d)\n");
             #endif // TESTING
@@ -181,17 +195,20 @@ void parseArguments(int* argc, char* argv[]){
                 #endif // TESTING
                 exit(EXIT_FAILURE);
             }
-        } else if (strcmp(argv[*i], "-v") == 0) {                       // Parse -v argument
+            break;
+        case 'v':                                                       // Parse -v argument
             #ifdef TESTING
             printf("Enter -v if block (argument == -v)\n");
             #endif // TESTING
             *viewArgPresent = 1;                                            // -v argument exist, so set to 1
-        } else if (strcmp(argv[*i], "-h") == 0) {                       // Parse -h argument
+            break;
+        case 'h':                                                       // Parse -h argument
             #ifdef TESTING
             printf("Enter -h if block (argument == -h)\n");
             #endif // TESTING
             *helpArgPresent = 1;                                            // -h argument exist, so set to 1
-        } else {                                                        // If argument is invalid, exit with failure
+            break;
+        default:                                                        // If argument is invalid, exit with failure
             free(i);
             free(temp);
             free(control);
@@ -200,6 +217,7 @@ void parseArguments(int* argc, char* argv[]){
             printf("Exit on parseArguments because argument is invalid\n");
             #endif // TESTING
             exit(EXIT_FAILURE);
+            break;
         }
     }
 
@@ -226,3 +244,5 @@ void parseArguments(int* argc, char* argv[]){
     printf("Finish parseArguments\n");
     #endif // TESTING
 }
+
+#endif // ARGUMENTPARSER_H
