@@ -83,14 +83,20 @@ int main(int argc, char* argv[]){   // TESTING main
     char* argIntegerAux = (char*)malloc(sizeof(char));
     char* argFractionAux = (char*)malloc(sizeof(char));
 
-    for (int i = 0; numberArgIntegerValue[i] != '\0'; i++) {
+    printf("\nargIntegerAux: %s -- argFractionAux: %s\n", argIntegerAux, argFractionAux);
+
+    strcpy(argIntegerAux , numberArgIntegerValue);
+    strcpy(argFractionAux , numberArgFractionValue);
+
+    printf("\nargIntegerAux: %s -- argFractionAux: %s\n", argIntegerAux, argFractionAux);
+ /*   for (int i = 0; numberArgIntegerValue[i] != '\0'; i++) {
         argIntegerAux[i] = numberArgIntegerValue[i];
     }
 
     for (int i = 0; numberArgFractionValue[i] != '\0'; i++) {
         argFractionAux[i] = numberArgFractionValue[i];
     }
-
+*/
     //TESTING INTEGER METHODS
 
     printf("******************Start integer multiplication method test**********************************\n\n");
