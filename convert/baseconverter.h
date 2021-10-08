@@ -34,7 +34,10 @@ int* integerMultiplicationMethod(char* source, int* sourceLenght, int* sourceBas
     int* digInt = (int*) malloc(sizeof(int));
     int* position = (int*) malloc(sizeof(int));
     double* calcAux = (double*) malloc(sizeof(double));
-    *calcAux = 0;
+    *toReturn = 0;
+    *calcAux =  0;
+    *digInt  =  0;
+    *position = 0;
 
     for (*i = 0; *i < *sourceLenght; (*i)++) {
         digitValue(&source[*i], digInt);
