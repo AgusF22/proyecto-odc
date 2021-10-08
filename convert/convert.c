@@ -150,20 +150,8 @@ int main(int argc, char* argv[]){   // TESTING main
 
     printf("RESULTADO DE LA CONVERSION: ");
 
-    printf("(");
-    for(int j=0; argIntegerAux[j] != '\0'; j++)
-        printf("%c", argIntegerAux[j]);
-    printf(".");
-    for(int i = 0; argFractionAux[i] != '\0'; i++)
-        printf("%c", argFractionAux[i]);
-    printf(")%d", *sourceArgValue);
-    printf(" = (");
-    for(int j=0; sourceDest[j] != '\0'; j++)
-        printf("%c", sourceDest[j]);
-    printf(".");
-    for(int i = 0; fracBase10[i] != '\0'; i++)
-        printf("%c", fracBase10[i]);
-    printf(")%d", *destArgValue);
+    printf("(%s.%s)%d = ",argIntegerAux,argFractionAux,*sourceArgValue);
+    printf("(%s.%s)%d", sourceDest, fracBase10, *destArgValue);
 
     printf("\n\n");
 
