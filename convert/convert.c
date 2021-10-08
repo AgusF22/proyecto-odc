@@ -107,9 +107,8 @@ int main(int argc, char* argv[]){   // TESTING main
     printf("******************Start fractional division method test**********************************\n\n");
 
     float* fracBaseOrigin = (float*)malloc(sizeof(float));
-    int lengFrac = strlen(numberArgFractionValue);
 
-    fracBaseOrigin = fractionDivisionMethod(numberArgFractionValue, &lengFrac, sourceArgValue, viewArgPresent);
+    fracBaseOrigin = fractionDivisionMethod(numberArgFractionValue, sourceArgValue, viewArgPresent);
 
     printf("fraccionario a base 10 = %.5f\n", *fracBaseOrigin);
 
