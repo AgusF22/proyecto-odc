@@ -1,4 +1,4 @@
-//#define TESTING
+#define TESTING
 #ifdef TESTING
     #include <string.h>
 #endif // TESTING
@@ -41,8 +41,8 @@ int main(int argc, char* argv[]){
     sourceArgValue = (int*)malloc(sizeof(int));
     destArgValue = (int*)malloc(sizeof(int));
 
-    int* base10IntegerN;
-    int* base10FractionalN;
+    long long* base10IntegerN;
+    float* base10FractionalN;
     char* convertedIntegerN;
     char* convertedFractionalN;
 

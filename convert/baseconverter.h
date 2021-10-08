@@ -140,8 +140,8 @@ char* integerDivisionMethod(long long* nInteger, int* destBase, int* viewArgumen
         digitChar(rest, &arrayAux[*i]);
 
         if (*viewArgument == 1)
-            printf("%*I64d / %d = %.5lf, rest = (%d)10 = (%c)%d\n",
-                *length, *nIntegerCopy, *destBase, *quotient, *rest, arrayAux[*i], *destBase);
+            printf("%*I64d / %d = %*.5lf, rest = (%d)10 = (%c)%d\n",
+                *length, *nIntegerCopy, *length, *destBase, *quotient, *rest, arrayAux[*i], *destBase);
 
         *nIntegerCopy = (long long)*quotient;
      //   digitChar(rest, &arrayAux[*i]);
