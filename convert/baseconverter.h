@@ -27,20 +27,38 @@ void digitValue(char* num, int* digInt) {
     }
 }
 
-int* integerMultiplicationMethod(const char* nInteger, int* sourceLenght, int* sourceBase, int* viewArgument){
+int* isRepresentable(long long* num, int* baseDest) {
+    int* aux = (int*) malloc(sizeof(int));
+
+    if (  pow(*baseDest, 10) - 1 >= *num)
+        *aux = 1;   //Representable
+    else
+        *aux = 0;   //No representable
+
+    return aux;
+}
+
+long long* integerMultiplicationMethod(char* nInteger, int* sourceBase, int* viewArgument){
     // metodo de la multiplicacion para enteros (de base sourceBase a base 10)
 
     char* nIntegerCopy = (char*) malloc(sizeof(char));
-    int* toReturn = (int*)malloc(sizeof(int));
+    long long* toReturn = (long long*)malloc(sizeof(long long));
     int* i = (int*) malloc(sizeof(int));
     int* digInt = (int*) malloc(sizeof(int));
     int* position = (int*) malloc(sizeof(int));
-    double* calcAux = (double*) malloc(sizeof(double));
+    long long* calcAux = (long long*) malloc(sizeof(long long));
+    int* sourceLenght = (int*) malloc(sizeof(int));
+
+    *sourceLenght = 0;
 
     for(*i = 0; nInteger[*i] != '\0'; (*i)++){
         nIntegerCopy[*i] = nInteger[*i];
     }
     nIntegerCopy[*i] = '\0';
+
+    while(nIntegerCopy[*sourceLenght] != '\0') {
+        (*sourceLenght)++;
+    }
 
     *toReturn = 0;
     *calcAux =  0;
@@ -53,9 +71,9 @@ int* integerMultiplicationMethod(const char* nInteger, int* sourceLenght, int* s
         *calcAux += *digInt * pow(*sourceBase, *position);
 
         if (*viewArgument == 1) {
-            printf("%d + %d * (%d exp %d) = %.0f\n", *toReturn, *digInt, *sourceBase, *position, *calcAux);
+            printf("%*I64d  + %d * %d^%d = %I64d\n", *sourceLenght, *toReturn, *digInt, *sourceBase, *position, *calcAux);
         }
-        *toReturn = (int) *calcAux;
+        *toReturn = *calcAux;
     }
 
     free(i);
@@ -63,41 +81,74 @@ int* integerMultiplicationMethod(const char* nInteger, int* sourceLenght, int* s
     free(position);
     free(calcAux);
     free(nIntegerCopy);
+    free(sourceLenght);
 
     return toReturn;
 }
 
-char* integerDivisionMethod(const int* nInteger, int* destBase, int* viewArgument){
+char* integerDivisionMethod(long long* nInteger, int* destBase, int* viewArgument){
     // metodo de la division para enteros (de base 10 a base destBase)
 
-    int* sourceCopy = (int*) malloc(sizeof(int));
+    long long* nIntegerCopy = (long long*) malloc(sizeof(long long));
     char* toReturn = (char*)malloc(sizeof(char) * 10);
     char* arrayAux = (char*)malloc(sizeof(char) * 10);
     int* i = (int*) malloc(sizeof(int));
     int* j = (int*) malloc(sizeof(int));
-    float* quotient = (float*) malloc(sizeof(float));
+    double* quotient = (double*) malloc(sizeof(double));
     int* rest = (int*) malloc(sizeof(int));
+    int* representable = (int*) malloc(sizeof(int));
+    int* length = (int*) malloc(sizeof(int));
+    *length = 0;
+
+    *nIntegerCopy = *nInteger;
+
+    while(*nIntegerCopy != 0) { //longitud
+        *nIntegerCopy /= 10;
+        (*length)++;
+    }
+
+    *nIntegerCopy = *nInteger;
+
+    representable = isRepresentable(nIntegerCopy, destBase);
+
+    if(*representable == 0) {
+        //free
+        free(i);
+        free(quotient);
+        free(rest);
+        free(arrayAux);
+        free(nIntegerCopy);
+        free(representable);
+        free(toReturn);
+        freeAll();
+        free(nInteger);
+        free(length);
+
+        exit(EXIT_FAILURE);
+    }
+
     *quotient = 0;
-    *sourceCopy = *nInteger;
+    *nIntegerCopy = *nInteger;
     *rest = 0;
     *i = 0;
     *j = 0;
 
     do {
-        *quotient = *sourceCopy / *destBase;
-        *rest = *sourceCopy % *destBase;
-
+        *quotient = (double)*nIntegerCopy / (double) *destBase;
+        *rest = *nIntegerCopy % *destBase;
+        *quotient = trunc(*quotient);
         digitChar(rest, &arrayAux[*i]);
+
         if (*viewArgument == 1)
-            printf("%d / %d = %.0f, rest = (%d)10 = (%c)%d\n", *sourceCopy, *destBase, *quotient, *rest, arrayAux[*i], *destBase);
+            printf("%*I64d / %d = %.5lf, rest = (%d)10 = (%c)%d\n",
+                *length, *nIntegerCopy, *destBase, *quotient, *rest, arrayAux[*i], *destBase);
 
-        *sourceCopy = *quotient;
-    //    digitChar(rest, &arrayAux[*i]);
+        *nIntegerCopy = (long long)*quotient;
+     //   digitChar(rest, &arrayAux[*i]);
         (*i)++;
-    } while (*sourceCopy != 0); //*source >= *destBase
+    } while (*nIntegerCopy != 0);
 
-    //digitChar(source, &arrayAux[*i]); //add last quotient
-    //(*i)++;
+
     arrayAux[*i] = '\0';
 
     while (*i > 0) {
@@ -123,7 +174,9 @@ char* integerDivisionMethod(const int* nInteger, int* destBase, int* viewArgumen
     free(quotient);
     free(rest);
     free(arrayAux);
-    free(sourceCopy);
+    free(nIntegerCopy);
+    free(representable);
+    free(length);
 
     return toReturn;
 }
@@ -148,6 +201,7 @@ char* fractionMultiplicationMethod(float* source, int* destBase, int* viewArgume
         *source = *calcAux - truncf(*calcAux);
     }
     toReturn[*i] = '\0';
+    //free
     return toReturn;
 }
 
