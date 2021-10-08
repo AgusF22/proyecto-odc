@@ -80,14 +80,6 @@ int main(int argc, char* argv[]){   // TESTING main
     printf("\n********************End parse arguments test**********************************\n\n");
 
 
- /*   for (int i = 0; numberArgIntegerValue[i] != '\0'; i++) {
-        argIntegerAux[i] = numberArgIntegerValue[i];
-    }
-
-    for (int i = 0; numberArgFractionValue[i] != '\0'; i++) {
-        argFractionAux[i] = numberArgFractionValue[i];
-    }
-*/
     //TESTING INTEGER METHODS
 
     printf("******************Start integer multiplication method test**********************************\n\n");

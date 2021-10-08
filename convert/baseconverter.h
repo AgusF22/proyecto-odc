@@ -1,3 +1,6 @@
+#ifndef BASECONVERTER_H
+#define BASECONVERTER_H
+
 #define TESTING
 
 #include<math.h>
@@ -179,3 +182,5 @@ float* fractionDivisionMethod(char* source, int* sourceLenght, int* sourceBase, 
 
     return toReturn;
 }
+
+#endif // BASECONVERTER_H
