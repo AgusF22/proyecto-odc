@@ -205,7 +205,7 @@ char* fractionMultiplicationMethod(float* source, int* destBase, int* viewArgume
     return toReturn;
 }
 
-float* fractionDivisionMethod(char* source, int* sourceLenght, int* sourceBase, int* viewArgument) {
+float* fractionDivisionMethod(char* nFraction, int* sourceBase, int* viewArgument) {
     // metodo de la division para fraccionarios (de base sourceBase a base 10)
 
     float* toReturn = (float*)malloc(sizeof(float));
@@ -214,10 +214,16 @@ float* fractionDivisionMethod(char* source, int* sourceLenght, int* sourceBase, 
     char* digChar = (char*) malloc(sizeof(char));
     int* digInt = (int*) malloc(sizeof(int));
     float* quotient = (float*) malloc(sizeof(float));
+    int* length = (int*) malloc(sizeof(int));
     *quotient = 0;
+    *length = 0;
 
-    for (*i = 0; *i < *sourceLenght; (*i)++) {
-        *digChar = source[*sourceLenght - (*i + 1)];
+    for(*i = 0; nFraction[*i] != '\0'; (*i)++){
+        (*length)++;
+    }
+
+    for (*i = 0; *i < *length; (*i)++) {
+        *digChar = nFraction[*length - (*i + 1)];
         digitValue(digChar, digInt);
         *quotient = (*quotient + *digInt) / *sourceBase;
 
@@ -231,6 +237,7 @@ float* fractionDivisionMethod(char* source, int* sourceLenght, int* sourceBase, 
     free(digChar);
     free(digInt);
     free(quotient);
+    free(length);
 
     return toReturn;
 }
