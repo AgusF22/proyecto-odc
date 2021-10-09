@@ -3,19 +3,19 @@
 
 #include<math.h>
 
-void digitChar(int* num, char* toReturn) {
-    switch (*num) {
+void digitChar(int* num, char* toReturn) {          // Codifica un numero a su respectiva representacion en ASCII.
+    switch (*num) {                                 //10 ... 15 -> A ... F
     case 10 ... 15:     *toReturn = *num + 55;
         break;
     case 0 ... 9:       *toReturn = *num + 48;
         break;
     default:
-        *toReturn = 0;
+        *toReturn = 0;                              //asigna 0 si los valores pasados por parametro no son correctos.
     }
 }
 
-void digitValue(char* num, int* digInt) {
-    switch (*num) {
+void digitValue(char* num, int* digInt) {           // Decodifica un caracter a su respectivo valor numerico.
+    switch (*num) {                                 //A ... F -> 10 ... 15
     case 'A' ... 'F':
         *digInt = *num - 55;
         break;
@@ -23,96 +23,100 @@ void digitValue(char* num, int* digInt) {
         *digInt = *num - 48;
         break;
     default:
-        *digInt = 0;
+        *digInt = 0;                                //asigna 0 si los valores pasados por parametro no son correctos.
     }
 }
 
-int* isRepresentable(long long* num, int* baseDest) {
+int* isRepresentable(long long* num, int* baseDest) {       // Verifica si num es un valor representable en la base destino.
     int* aux = (int*) malloc(sizeof(int));
 
-    if (  pow(*baseDest, 10) - 1 >= *num)
-        *aux = 1;   //Representable
+    if ( pow(*baseDest, 10) - 1 >= *num)                    //compara el maximo numero representable con num.
+        *aux = 1;                                           // Representable.
     else
-        *aux = 0;   //No representable
+        *aux = 0;                                           //No representable.
 
-    return aux;
+    return aux;                                             //retorna 1 si es representable, 0 en caso contrario.
 }
 
+
+/*
+ * metodo de la multiplicacion para enteros (de base sourceBase a base 10)
+*/
 long long* integerMultiplicationMethod(char* nInteger, int* sourceBase, int* viewArgument){
-    // metodo de la multiplicacion para enteros (de base sourceBase a base 10)
 
-    char* nIntegerCopy = (char*) malloc(sizeof(char));
-    long long* toReturn = (long long*)malloc(sizeof(long long));
-    int* i = (int*) malloc(sizeof(int));
-    int* digInt = (int*) malloc(sizeof(int));
-    int* position = (int*) malloc(sizeof(int));
-    long long* calcAux = (long long*) malloc(sizeof(long long));
-    int* sourceLenght = (int*) malloc(sizeof(int));
+    char* nIntegerCopy = (char*) malloc(sizeof(char));                     //variable auxilar para manipular el string nInteger.
+    long long* toReturn = (long long*)malloc(sizeof(long long));           //variable para almacena el valor que retorna el metodo.
+    int* i = (int*) malloc(sizeof(int));                                   //Index para recorrer ciclos.
+    int* digInt = (int*) malloc(sizeof(int));                              //variable para almacenar un caracter del string(nIntegerCopy).
+    int* position = (int*) malloc(sizeof(int));                            //variable para almacenar la posicion de un caracter del string.
+    long long* calcAux = (long long*) malloc(sizeof(long long));           //variable para almacenar el valor de la conversion hasta el momento.
+    int* sourceLenght = (int*) malloc(sizeof(int));                        //variable para almacenar la longitud del string(nIntegerCopy).
 
-    *sourceLenght = 0;
+    *sourceLenght = 0;                                                     //inicializa en 0 la longitud.
 
-    for(*i = 0; nInteger[*i] != '\0'; (*i)++){
-        nIntegerCopy[*i] = nInteger[*i];
+    for(*i = 0; nInteger[*i] != '\0'; (*i)++){                             //recorre nInteger hasta hallar el terminador
+        nIntegerCopy[*i] = nInteger[*i];                                   //copia en nIntegerCopy los caracters de nInteger.
     }
-    nIntegerCopy[*i] = '\0';
+    nIntegerCopy[*i] = '\0';                                               //agrega un terminador a nIntegerCopy.
 
-    while(nIntegerCopy[*sourceLenght] != '\0') {
-        (*sourceLenght)++;
-    }
+    *sourceLenght = *i;                                                    //guarda la longitud de nIntegerCopy en sourceLength.
 
-    *toReturn = 0;
+    *toReturn = 0;                                                         //inicializa en 0.
     *calcAux =  0;
     *digInt  =  0;
-    *position = 0;
+    *position = 0;                                                         //****************
 
-    for (*i = 0; *i < *sourceLenght; (*i)++) {
-        digitValue(&nIntegerCopy[*i], digInt);
-        *position = *sourceLenght - (*i + 1);
-        *calcAux += *digInt * pow(*sourceBase, *position);
+    for (*i = 0; *i < *sourceLenght; (*i)++) {                             //recorre todo el string nIntegerCopy
 
-        if (*viewArgument == 1) {
+        digitValue(&nIntegerCopy[*i], digInt);                             //guarda en digInt el valor numerico del caracter de nInteger en la posicion *i.
+        *position = *sourceLenght - (*i + 1);                              //guarda las posicion del string, del ultimo al primer caracter.
+        *calcAux += *digInt * pow(*sourceBase, *position);      //multiplica cada digito por su base elevado a su posicion relativa.
+
+        if (*viewArgument == 1) {                                          //imprime por pantalla los pasos intermedios.
             printf("%*I64d  + %d * %d^%d = %I64d\n", *sourceLenght, *toReturn, *digInt, *sourceBase, *position, *calcAux);
         }
-        *toReturn = *calcAux;
+        *toReturn = *calcAux;                                 //asigna el valor actual de la conversion.
     }
 
-    free(i);
+    free(i);                                                  //libera la memoria dinamica usada.
     free(digInt);
     free(position);
     free(calcAux);
     free(nIntegerCopy);
     free(sourceLenght);
 
-    return toReturn;
+    return toReturn;                                          //retorna el numero ingresado en base 10.
 }
 
+/*
+ * metodo de la division para enteros (de base 10 a base destBase)
+*/
 char* integerDivisionMethod(long long* nInteger, int* destBase, int* viewArgument){
-    // metodo de la division para enteros (de base 10 a base destBase)
 
-    long long* nIntegerCopy = (long long*) malloc(sizeof(long long));
-    char* toReturn = (char*)malloc(sizeof(char) * 10);
-    char* arrayAux = (char*)malloc(sizeof(char) * 10);
-    int* i = (int*) malloc(sizeof(int));
-    int* j = (int*) malloc(sizeof(int));
-    double* quotient = (double*) malloc(sizeof(double));
-    int* rest = (int*) malloc(sizeof(int));
-    int* representable = (int*) malloc(sizeof(int));
-    int* length = (int*) malloc(sizeof(int));
-    *length = 0;
+    long long* nIntegerCopy = (long long*) malloc(sizeof(long long));     //variable auxilar para manipular el numero nInteger.
+    char* toReturn = (char*)malloc(sizeof(char) * 10);                    //variable para almacena el valor que retorna el metodo.
+    char* arrayAux = (char*)malloc(sizeof(char) * 10);                    //variable para almacenar el string a retornar en orden inverso.
+    int* i = (int*) malloc(sizeof(int));                                  //Index para recorrer ciclos.
+    int* j = (int*) malloc(sizeof(int));                                  //Index para recorrer ciclos.
+    double* quotient = (double*) malloc(sizeof(double));                  //variable para almacenar el cociente de las divisiones.
+    int* rest = (int*) malloc(sizeof(int));                               //variable para almacenar el resto de la divisiones.
+    int* representable = (int*) malloc(sizeof(int));                      //variable para manejar magnitudes no representables.
+    int* length = (int*) malloc(sizeof(int));                             //variable para almacenar la longitud del numero nIntegerCopy.
+    *length = 0;                                                          //inicializa en 0 la longitud.
 
-    *nIntegerCopy = *nInteger;
+    *nIntegerCopy = *nInteger;                                            //copia el valor de nInteger en nIntegerCopy.
 
-    while(*nIntegerCopy != 0) { //longitud
+    while(*nIntegerCopy != 0) {                                           //calcula la longitud del numero nIntegerCopy.
         *nIntegerCopy /= 10;
         (*length)++;
     }
 
-    *nIntegerCopy = *nInteger;
+    *nIntegerCopy = *nInteger;                                            //vuelve a copiar el valor de nInteger en nIntegerCopy
 
-    representable = isRepresentable(nIntegerCopy, destBase);
+    representable = isRepresentable(nIntegerCopy, destBase);              //verifica si el numero es representable en la base destino.
 
-    if(*representable == 0) {
-        //free
+    if(*representable == 0) {                                             //si lo es representable, libera la memoria dinamica
+        //free                                                            // y termina el programa con EXIT_FAILURE.
         free(i);
         free(quotient);
         free(rest);
@@ -127,31 +131,29 @@ char* integerDivisionMethod(long long* nInteger, int* destBase, int* viewArgumen
         exit(EXIT_FAILURE);
     }
 
-    *quotient = 0;
-    *nIntegerCopy = *nInteger;
+    *quotient = 0;                                                      //inicializa variables en 0.
     *rest = 0;
     *i = 0;
     *j = 0;
 
     do {
-        *quotient = (double)*nIntegerCopy / (double) *destBase;
-        *rest = *nIntegerCopy % *destBase;
-        *quotient = trunc(*quotient);
-        digitChar(rest, &arrayAux[*i]);
+        *quotient = (double)*nIntegerCopy / (double) *destBase;         //calcula el cociente entre nIntegerCopy y la base destino.
+        *rest = *nIntegerCopy % *destBase;                              //calcula el resto entre nIntegerCopy y la base destino.
+        *quotient = trunc(*quotient);                                   //trunca el valor del cociente, quotient conserva la parte entera.
+        digitChar(rest, &arrayAux[*i]);                                 //almacena en arrayAux el resto calculado previamente.
 
-        if (*viewArgument == 1)
+        if (*viewArgument == 1)                                          //imprime por pantalla los pasos intermedios.
             printf("%*I64d / %d = %*.5lf, rest = (%d)10 = (%c)%d\n",
                 *length, *nIntegerCopy, *length, *destBase, *quotient, *rest, arrayAux[*i], *destBase);
 
-        *nIntegerCopy = (long long)*quotient;
-     //   digitChar(rest, &arrayAux[*i]);
-        (*i)++;
-    } while (*nIntegerCopy != 0);
+        *nIntegerCopy = (long long)*quotient;                            //almacena en nIntegerCopy el cociente truncado(parte entera).
+        (*i)++;                                                          //incrementa el contador en 1.
+    } while (*nIntegerCopy != 0);                                        //cicla hasta que nIntegerCopy sea 0(cuando el cociente sea 0).
 
 
-    arrayAux[*i] = '\0';
+    arrayAux[*i] = '\0';                                                 //agrega un terminador a arrayAux.
 
-    while (*i > 0) {
+    while (*i > 0) {                                                     //copia en toReturn el arrayAux en orden inverso.
         toReturn[*j] = arrayAux[(*i)-1];
         #if 0
         #ifdef TESTING
@@ -161,7 +163,7 @@ char* integerDivisionMethod(long long* nInteger, int* destBase, int* viewArgumen
         (*i)--;
         (*j)++;
     }
-    toReturn[*j] = '\0';
+    toReturn[*j] = '\0';                                                 //agrega un terminador a toReturn
 
     #if 0
     #ifdef TESTING
@@ -170,7 +172,7 @@ char* integerDivisionMethod(long long* nInteger, int* destBase, int* viewArgumen
     #endif // TESTING
     #endif
 
-    free(i);
+    free(i);                                                            //libera la memoria dinamica.
     free(quotient);
     free(rest);
     free(arrayAux);
@@ -178,68 +180,78 @@ char* integerDivisionMethod(long long* nInteger, int* destBase, int* viewArgumen
     free(representable);
     free(length);
 
-    return toReturn;
+    return toReturn;                                                    //retorna el string con el numero en base destino.
 }
 
-char* fractionMultiplicationMethod(float* source, int* destBase, int* viewArgument){
-    // metodo de la multiplicacion para fraccionarios (de base 10 a base destBase)
+/*
+ * metodo de la multiplicacion para fraccionarios (de base 10 a base destBase)
+*/
+char* fractionMultiplicationMethod(float* nFraction, int* destBase, int* viewArgument){
 
-    char* toReturn = (char*)malloc(sizeof(char) * 5);
-    int* i = (int*) malloc(sizeof(int));
-    float* calcAux = (float*) malloc(sizeof(float));
-    int* truncated = (int*) malloc(sizeof(int));
+    char* toReturn = (char*)malloc(sizeof(char) * 5);               //variable para almacenar el valor de retorno del metodo.
+    int* i = (int*) malloc(sizeof(int));                            //index para recorrer ciclos.
+    float* calcAux = (float*) malloc(sizeof(float));                //variable para almacenar calculos de pasos intermedios.
+    int* truncated = (int*) malloc(sizeof(int));                    //varianle para amacenar un valor truncado.
 
-    for (*i = 0; *i < 5; (*i)++) {
-        *calcAux = (*source) * (*destBase);
-        *truncated = truncf(*calcAux);
-        digitChar(truncated, &toReturn[*i]);
+    for (*i = 0; *i < 5; (*i)++) {                                  //ciclo de 5 repeticiones(una repeticion por cada digito).
+        *calcAux = (*nFraction) * (*destBase);                      //calcula el producto entre el numero y la base destino.
+        *truncated = truncf(*calcAux);                              //trunca calcAux para salvar la parte entera.
+        digitChar(truncated, &toReturn[*i]);                        //almacena el valor truncado en el array de salida, en su respectiva codificacion.
 
-        if (*viewArgument == 1) {
-            printf("%.5f * %d = %.5lf\n", *source, *destBase, *calcAux);
+        if (*viewArgument == 1) {                                   //muestra por pantalla los pasos intermedios.
+            printf("%.5f * %d = %.5lf\n", *nFraction, *destBase, *calcAux);
         }
 
-        *source = *calcAux - truncf(*calcAux);
+        *nFraction = *calcAux - truncf(*calcAux);                   //almacena en nFraction la parte fraccionaria de calcAux.
     }
-    toReturn[*i] = '\0';
-    //free
-    return toReturn;
+    toReturn[*i] = '\0';                                            //agrega un terminador a toReturn.
+
+    //free                                                          //libera la memoria dinamica.
+    free(i);
+    free(calcAux);
+    free(truncated);
+    freeAll();
+
+    return toReturn;                                                //retorna el numero en base destino.
 }
 
+
+/*
+ * metodo de la division para fraccionarios (de base sourceBase a base 10)
+*/
 float* fractionDivisionMethod(char* nFraction, int* sourceBase, int* viewArgument) {
-    // metodo de la division para fraccionarios (de base sourceBase a base 10)
 
-    float* toReturn = (float*)malloc(sizeof(float));
-
-    int* i = (int*) malloc(sizeof(int));
-    char* digChar = (char*) malloc(sizeof(char));
-    int* digInt = (int*) malloc(sizeof(int));
-    float* quotient = (float*) malloc(sizeof(float));
-    int* length = (int*) malloc(sizeof(int));
-    *quotient = 0;
+    float* toReturn = (float*)malloc(sizeof(float));                //variable para almacenar el valor de retorno.
+    int* i = (int*) malloc(sizeof(int));                            //index para recorrer ciclos.
+    char* digChar = (char*) malloc(sizeof(char));                   //variable para almacenar un caracter del string nFraction.
+    int* digInt = (int*) malloc(sizeof(int));                       //variable para almacenar un digito del numero nFraction.
+    float* quotient = (float*) malloc(sizeof(float));               //variable para almacenar el cociente de divisiones a nFraction.
+    int* length = (int*) malloc(sizeof(int));                       //variable para almacenar la longitud de nFraction.
+    *quotient = 0;                                                  //inicializa en 0 las variables.
     *length = 0;
 
-    for(*i = 0; nFraction[*i] != '\0'; (*i)++){
+    for(*i = 0; nFraction[*i] != '\0'; (*i)++){                     //recorre nFraction para obtener su longitud.
         (*length)++;
     }
 
-    for (*i = 0; *i < *length; (*i)++) {
-        *digChar = nFraction[*length - (*i + 1)];
-        digitValue(digChar, digInt);
-        *quotient = (*quotient + *digInt) / *sourceBase;
+    for (*i = 0; *i < *length; (*i)++) {                            //recorre las posiciones de nFraction.
+        *digChar = nFraction[*length - (*i + 1)];                   //almacena un caracter de nFraction. Comienza desde la ultima posicion.
+        digitValue(digChar, digInt);                                //almacena en digInt el valor numerico de digChar.
+        *quotient = (*quotient + *digInt) / *sourceBase;            //calcula la suma del cociente + digInt y los divide por su base.
 
-        if (*viewArgument == 1) {
-            printf("(%.5f + %d) / 10 = %.6f\n", *toReturn, *digInt, *quotient); //TODO redondear o truncar?
+        if (*viewArgument == 1) {                                   //muestra por pantalla los pasos intermedios.
+            printf("(%.5f + %d) / 10 = %.6f\n", *toReturn, *digInt, *quotient);
         }
-        *toReturn = *quotient;
+        *toReturn = *quotient;                                      //almacena en toReturn el cociente, antes de volver a ciclar.
     }
 
-    free(i);
+    free(i);                                                        //libera memoria dinamica.
     free(digChar);
     free(digInt);
     free(quotient);
     free(length);
 
-    return toReturn;
+    return toReturn;                                                //retorna el numero en base 10.
 }
 
 #endif // BASECONVERTER_H
