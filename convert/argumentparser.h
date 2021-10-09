@@ -11,7 +11,14 @@ extern int* destArgValue;
 
 extern void freeAll();
 
-void validateDigit(char* digit, int* base, int* control){
+/**
+* @brief Checks if the given character is a valid digit for a given base.
+* @param digit A pointer to char, the character to check.
+* @param base A pointer to integer, pointing to a value in the range [2, 16], the base to check.
+* @param control A pointer to integer. This procedure will store EXIT_FAILURE on it if an error occurred.
+* @attention Calling this procedure with base outside range [2, 16] is undefined behavior.
+*/
+void validateDigit(const char* digit, const int* base, int* control){
     #ifdef TESTING
     printf("Start validateDigit\n");
     #endif // TESTING
@@ -41,7 +48,12 @@ void validateDigit(char* digit, int* base, int* control){
     #endif // TESTING
 }
 
-void parseN(char* toParseNArg, int* control){
+/**
+* @brief Checks if the given array is a valid number in the current source base argument value.
+* @param toParseNArg The array to check.
+* @param control A pointer to integer. This procedure will store EXIT_FAILURE on it if an error occurred.
+*/
+void parseN(const char* toParseNArg, int* control){
     #ifdef TESTING
     printf("Start parseN\n");
     #endif // TESTING
@@ -93,7 +105,13 @@ void parseN(char* toParseNArg, int* control){
     #endif // TESTING
 }
 
-void parseBase(int* base, int* baseArg, int* control){
+/**
+* @brief Checks if a given base is valid, and, if it is, stores it in the given pointer.
+* @param base A pointer to integer, the base to check.
+* @param baseArg A pointer to integer, pointing to the memory address in which, in case of being valid, the base will be stored.
+* @param control A pointer to integer. This procedure will store EXIT_FAILURE on it if an error occurred.
+*/
+void parseBase(const int* base, int* baseArg, int* control){
     #ifdef TESTING
     printf("Start parseBase with base == %d\n", *base);
     #endif // TESTING
@@ -106,6 +124,11 @@ void parseBase(int* base, int* baseArg, int* control){
     #endif // TESTING
 }
 
+/**
+* @brief Checks if the given arguments are valid for the program.
+* @param argc The amount of arguments.
+* @param argv An array of strings, the arguments for the program execution.
+*/
 void parseArguments(int* argc, char* argv[]){
     #ifdef TESTING
     printf("Start parseArguments\n");

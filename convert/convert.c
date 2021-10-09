@@ -1,4 +1,4 @@
-#define TESTING
+//#define TESTING
 #ifdef TESTING
     #include <string.h>
 #endif // TESTING
@@ -8,14 +8,17 @@
 #include "argumentparser.h"
 #include "baseconverter.h"
 
-int* helpArgPresent;
-int* viewArgPresent;
+int* helpArgPresent;            /**< @brief Pointer to integer, to store 1 if the help argument is present, 0 if not.*/
+int* viewArgPresent;            /**< @brief Pointer to integer, to store 1 if the view argument is present, 0 if not.*/
 
-char* numberArgIntegerValue;
-char* numberArgFractionValue;
-int* sourceArgValue;
-int* destArgValue;
+char* numberArgIntegerValue;    /**< @brief Char array, the value of the integer part of the number argument.*/
+char* numberArgFractionValue;   /**< @brief Char array, the value of the fractional part of the number argument.*/
+int* sourceArgValue;            /**< @brief Pointer to integer, the value of the source base argument.*/
+int* destArgValue;              /**< @brief Pointer to integer, the value of the destination base argument.*/
 
+/**
+* @brief Frees all the the global variables.
+*/
 void freeAll(){
     free(helpArgPresent);
     free(viewArgPresent);
@@ -26,12 +29,36 @@ void freeAll(){
     free(destArgValue);
 }
 
+/**
+* @brief Prints to the console the convert program help message.
+*/
 void showHelp(){
-    printf("HELP\n");
+    printf("\n");
+    printf("convert -n <number> [-s <source_base>] [-d <dest_base>] [-v] [-h]\n");
+    printf("\n");
+    printf("Description:\n");
+    printf("\tThis tool is used to convert numbers between different bases. Allowed bases are in the range [2, 16].\n");
+    printf("\n");
+    printf("Parameter list:\n");
+    printf("%4s\t%-11s\t%s\n\n", "-n", "number"       , "Specifies the number to convert. If it is not in base 10, -s argument must be specified.");
+    printf("%4s\t%-11s\t%s\n\n", "-s", "source_base"  , "Specifies the source base.");
+    printf("%4s\t%-11s\t%s\n\n", "-d", "dest_base"    , "Specifies the destination base.");
+    printf("%4s\t%-11s\t%s\n\n", "-v", ""             , "Tells the program to show the calculation steps.");
+    printf("%4s\t%-11s\t%s\n", "-h", ""             , "Shows this help message.");
+    printf("\n");
+    printf("%3sNOTE\n", "");
+    printf("%3s----\n", "");
+    printf("%3sThis program represents numbers with 10 precision digits for the integer part, and 5 for the fractional part.\n", "");
+    printf("%3sThe conversion will fail if the outcome has more that 10 digits.\n", "");
 }
 
 #ifndef TESTING
 
+/**
+* @brief Main function of the convert program.
+* @param argc Amount of arguments.
+* @param argv Array of strings, the arguments for the execution.
+*/
 int main(int argc, char* argv[]){
     helpArgPresent = (int*)malloc(sizeof(int));
     viewArgPresent = (int*)malloc(sizeof(int));
@@ -56,18 +83,18 @@ int main(int argc, char* argv[]){
         } else {
             base10IntegerN = integerMultiplicationMethod(numberArgIntegerValue, sourceArgValue, viewArgPresent);
             convertedIntegerN = integerDivisionMethod(base10IntegerN, destArgValue, viewArgPresent);
+            free(base10IntegerN);
 
             base10FractionalN = fractionDivisionMethod(numberArgFractionValue, sourceArgValue, viewArgPresent);
             convertedFractionalN = fractionMultiplicationMethod(base10FractionalN, destArgValue, viewArgPresent);
+            free(base10FractionalN);
 
             printf("%s.%s\n", convertedIntegerN, convertedFractionalN);
+            free(convertedIntegerN);
+            free(convertedFractionalN);
         }
     }
 
-    free(base10IntegerN);
-    free(base10FractionalN);
-    free(convertedIntegerN);
-    free(convertedFractionalN);
     freeAll();
 
     return EXIT_SUCCESS;
