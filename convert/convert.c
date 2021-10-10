@@ -79,7 +79,7 @@ int main(int argc, char* argv[]){
         showHelp();
     } else {
         if (*sourceArgValue == *destArgValue) {
-            printf("%s.%s\n", numberArgIntegerValue, numberArgFractionValue);
+            printf("Result: %s.%s\n", numberArgIntegerValue, numberArgFractionValue);
         } else {
             base10IntegerN = integerMultiplicationMethod(numberArgIntegerValue, sourceArgValue, viewArgPresent);
             convertedIntegerN = integerDivisionMethod(base10IntegerN, destArgValue, viewArgPresent);
@@ -89,7 +89,7 @@ int main(int argc, char* argv[]){
             convertedFractionalN = fractionMultiplicationMethod(base10FractionalN, destArgValue, viewArgPresent);
             free(base10FractionalN);
 
-            printf("%s.%s\n", convertedIntegerN, convertedFractionalN);
+            printf("Result: %s.%s\n", convertedIntegerN, convertedFractionalN);
             free(convertedIntegerN);
             free(convertedFractionalN);
         }
