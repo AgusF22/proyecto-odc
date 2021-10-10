@@ -129,6 +129,10 @@ char* integerDivisionMethod(long long* nInteger, const int* destBase, const int*
     int* representable = (int*) malloc(sizeof(int));                        // Pointer to store the condition of whether the given number is representable or not
     representable = isRepresentable(nInteger, destBase);                    // Verifies if the given number is representable in the given base with a precision of 10
     if(*representable == 0) {                                               // If number is not representable
+        if(*viewArgument == 1){                                                 // If viewArgument is true
+            printf("Error: input number has more than 10 integer ");
+            printf("digits in base %d", *destBase);                                 // inform error
+        }
         free(representable);                                                    //
         free(nInteger);                                                         // Free memory
         freeAll();                                                              // and exit
