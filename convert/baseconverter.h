@@ -76,29 +76,29 @@ long long* integerMultiplicationMethod(const char* nInteger, const int* sourceBa
     int* nDigitValue = (int*) malloc(sizeof(int));                          // variable to store a digit from nInteger during nInteger traverse
     int* position = (int*) malloc(sizeof(int));                             // Variable to store a position during nInteger traverse
     long long* prevOutcome = (long long*) malloc(sizeof(long long));        // variable to store the outcome of the previous iteration during calculations
-    int* nIntegerLenght = (int*) malloc(sizeof(int));                       // variable to store the length of nInteger
+    int* nIntegerLength = (int*) malloc(sizeof(int));                       // variable to store the length of nInteger
 
     *outcome = 0;                                                           // By default, outcome is 0
-    *nIntegerLenght = 0;                                                    // By default, length is 0
+    *nIntegerLength = 0;                                                    // By default, length is 0
 
     for (*i = 0; nInteger[*i] != '\0'; (*i)++) {                            // While character in index is not null
-        ++(*nIntegerLenght);                                                    // increment length
+        ++(*nIntegerLength);                                                    // increment length
     }
 
     if (*viewArgument == 1) {                                               // if viewArgument is true
         printf("Start integer multiplication method\n");                        // inform start of this function calculations
     }
 
-    for (*i = 0; *i < *nIntegerLenght; (*i)++) {                            // Traverse nIntegerCopy, reading all digits
+    for (*i = 0; *i < *nIntegerLength; (*i)++) {                            // Traverse nIntegerCopy, reading all digits
         *prevOutcome = *outcome;                                                // Save outcome to previous outcome
 
         digitValue(&nInteger[*i], nDigitValue);                                 // Store the value of the digit in the index position of nIntegerCopy
-        *position = (*nIntegerLenght - 1) - *i;                                 // Store the position of the digit in the number, that is, counting from right to left
+        *position = (*nIntegerLength - 1) - *i;                                 // Store the position of the digit in the number, that is, counting from right to left
         *outcome += (*nDigitValue) * pow(*sourceBase, *position);               // Multiply the value of the digit, by the base to the power of the digit's position
 
         if (*viewArgument == 1) {                                               // if viewArgument is true
-            printf("%*I64d + (%d * %d^%d) = %I64d\n",                                // print the current iteration status
-                   *nIntegerLenght, *prevOutcome, *nDigitValue,
+            printf("%10I64d + (%2d * %d^%2d) = %I64d\n",                            // print the current iteration status
+                   *prevOutcome, *nDigitValue,
                    *sourceBase, *position, *outcome);
         }
     }
@@ -107,7 +107,7 @@ long long* integerMultiplicationMethod(const char* nInteger, const int* sourceBa
     free(nDigitValue);                                                      // *******************
     free(position);                                                         // Free dynamic memory
     free(prevOutcome);                                                      // *******************
-    free(nIntegerLenght);                                                   // *******************
+    free(nIntegerLength);                                                   // *******************
 
     return outcome;
 }
@@ -129,10 +129,8 @@ char* integerDivisionMethod(long long* nInteger, const int* destBase, const int*
     int* representable = (int*) malloc(sizeof(int));                        // Pointer to store the condition of whether the given number is representable or not
     representable = isRepresentable(nInteger, destBase);                    // Verifies if the given number is representable in the given base with a precision of 10
     if(*representable == 0) {                                               // If number is not representable
-        if(*viewArgument == 1){                                                 // If viewArgument is true
-            printf("Error: input number has more than 10 integer ");
-            printf("digits in base %d", *destBase);                                 // inform error
-        }
+        printf("Error: input number has more than 10 integer ");
+        printf("digits in base %d.\n", *destBase);                              // Inform error
         free(representable);                                                    //
         free(nInteger);                                                         // Free memory
         freeAll();                                                              // and exit
@@ -161,7 +159,7 @@ char* integerDivisionMethod(long long* nInteger, const int* destBase, const int*
 
     *nIntegerCopy = *nInteger;                                              // assign nInteger value to nIntegerCopy (because it changed during length calculation)
 
-    if (*viewArgument == 1) {                                               // if viewArgument is true
+    if (*viewArgument == 1 && *destBase != 10) {                            // if viewArgument is true and destination base is not 10
         printf("Start integer division method\n");                              // inform start of this function calculations
     }
 
@@ -171,7 +169,7 @@ char* integerDivisionMethod(long long* nInteger, const int* destBase, const int*
         *quotient = trunc(*quotient);                                           // Remove decimal part of the quotient
         digitChar(rest, &invertedOutcome[*i]);                                  // Store the character with value equal to the remainder
 
-        if (*viewArgument == 1)                                                 // if viewArgument is true
+        if (*viewArgument == 1 && *destBase != 10)                              // if viewArgument is true and destination base is not 10
             printf("%*I64d / %d = %-*.0lf, remainder = (%2d)10 = (%c)%d\n",         // print the current iteration status
                    *nIntegerLength, *nIntegerCopy, *destBase,
                    *nIntegerLength, *quotient, *rest, invertedOutcome[*i],
@@ -269,7 +267,7 @@ char* fractionMultiplicationMethod(float* nFraction, const int* destBase, const 
     float* product = (float*) malloc(sizeof(float));                        // Pointer to store a product
     int* truncated = (int*) malloc(sizeof(int));                            // Pointer to store an integer
 
-    if (*viewArgument == 1) {                                               // if viewArgument is true
+    if (*viewArgument == 1 && *destBase != 10) {                            // if viewArgument is true and destination base is not 10
         printf("Start fractional multiplication method\n");                     // inform start of this function calculations
     }
 
@@ -278,7 +276,7 @@ char* fractionMultiplicationMethod(float* nFraction, const int* destBase, const 
         *truncated = truncf(*product);                                          // Store the integer part of the product
         digitChar(truncated, &outcome[*i]);                                     // Store the character that represents the value of the integer part in the outcome array
 
-        if (*viewArgument == 1) {                                               // if viewArgument is true
+        if (*viewArgument == 1 && *destBase != 10) {                        // if viewArgument is true and destination base is not 10
             printf("%.5f * %d = %8.5lf, digit %d^(-%d) = %c\n",                     // print the current iteration status
                    *nFraction, *destBase, *product, *destBase,
                    *i + 1, outcome[*i]);

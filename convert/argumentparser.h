@@ -22,6 +22,27 @@ void toUpperCase(char* character){
 }
 
 /**
+* @brief Stores the identifier character for the given string in the given pointer.
+* @details The identifier character is the second character of the argument, for the arguments of the form "-x", where x is any character.
+* @param str A string, the argument to check. Valid arguments are "-n", "-s", "-d", "-h", and "-v".
+* @param output A pointer to char, where the output will be stored. If the input argument is not valid, the output is a null character.
+*/
+void argToChar(char* str, char* output){
+    if (str[0] == '-' && str[2] == '\0') {              // If first character is '-' and third character is the termination character
+        switch (str[1]) {                                   // check second character
+        case 'n':   *output = 'n';  break;
+        case 's':   *output = 's';  break;
+        case 'd':   *output = 'd';  break;
+        case 'h':   *output = 'h';  break;
+        case 'v':   *output = 'v';  break;
+        default:    *output = '\0'; break;                  // if second character is invalid, output is null character
+        }
+    } else {                                            // else output is null character
+        *output = '\0';
+    }
+}
+
+/**
 * @brief Checks if the given character is a valid digit for a given base.
 * @param digit A pointer to char, the character to check.
 * @param base A pointer to integer, pointing to a value in the range [2, 16], the base to check.
@@ -124,7 +145,7 @@ void parseArguments(int* argc, char* argv[]){
     int* temp = (int*) malloc(sizeof(int));                             // Variable to store base string to int conversion
     int* control = (int*) malloc(sizeof(int));                          // Error control variable
     char* unparsedN = NULL;                                             // -n argument value variable, starts with null
-    char* argChar;
+    char* argChar = (char*) malloc(sizeof(char));                       // An identifier character for argument comparison
 
     numberArgIntegerValue[0] = '\0';                                    // by default, n integer part is empty
     numberArgFractionValue[0] = '\0';                                   // by default, n fractional part is empty
@@ -134,7 +155,7 @@ void parseArguments(int* argc, char* argv[]){
     *viewArgPresent = 0;                                                // By default, view argument is not present
 
     for (*i = 1; *i < *argc && *control != EXIT_FAILURE; (*i)++) {       // Traverse all arguments or until error
-        argChar = &argv[*i][1];
+        argToChar(argv[*i], argChar);
 
         switch (*argChar) {
         case 'n':                                                       // Parse -n argument
@@ -153,7 +174,10 @@ void parseArguments(int* argc, char* argv[]){
                 free(i);
                 free(temp);
                 free(control);
+                free(argChar);
                 freeAll();
+                printf("Syntax error: invalid source base.\n");
+                printf("Use \"convert -h\" for help.\n");
                 exit(EXIT_FAILURE);
             }
             break;
@@ -168,7 +192,10 @@ void parseArguments(int* argc, char* argv[]){
                 free(i);
                 free(temp);
                 free(control);
+                free(argChar);
                 freeAll();
+                printf("Syntax error: invalid destination base.\n");
+                printf("Use \"convert -h\" for help.\n");
                 exit(EXIT_FAILURE);
             }
             break;
@@ -182,28 +209,37 @@ void parseArguments(int* argc, char* argv[]){
             free(i);
             free(temp);
             free(control);
+            free(argChar);
             freeAll();
+            printf("Syntax error: invalid argument detected.\n");
+            printf("Use \"convert -h\" for help.\n");
             exit(EXIT_FAILURE);
             break;
         }
     }
 
-    if (unparsedN != NULL) {
-        parseN(unparsedN, control);
-    } else {
-        *control = EXIT_FAILURE;
+    if (*helpArgPresent == 0) {
+        if (unparsedN != NULL) {
+            parseN(unparsedN, control);
+        } else {
+            *control = EXIT_FAILURE;
+        }
     }
     if (*control == EXIT_FAILURE){
         free(i);
         free(temp);
         free(control);
+        free(argChar);
         freeAll();
+        printf("Syntax error: invalid number.\n");
+        printf("Use \"convert -h\" for help.\n");
         exit(EXIT_FAILURE);
     }
 
     free(i);
     free(temp);
     free(control);
+    free(argChar);
 }
 
 #endif // ARGUMENTPARSER_H

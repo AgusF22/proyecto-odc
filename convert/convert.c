@@ -84,7 +84,9 @@ int main(int argc, char* argv[]){
                 integerDivisionMethod(base10IntegerN,                           // convert integer part to destination base
                                       destArgValue, viewArgPresent);            // ****************************************
 
-            if(*viewArgPresent == 1) printf("\n");                              // print end of line if showing process
+            if(*viewArgPresent == 1 && *destArgValue != 10) {                   // print end of line if showing process
+                    printf("\n");
+            }
 
             free(base10IntegerN);                                               // free the integer base 10 intermediate result
 
@@ -98,7 +100,9 @@ int main(int argc, char* argv[]){
                 fractionMultiplicationMethod(base10FractionalN,                 // convert fractional part to destination base
                                              destArgValue, viewArgPresent);     // *******************************************
 
-            if(*viewArgPresent == 1) printf("\n");                              // print end of line if showing process
+            if(*viewArgPresent == 1 && *destArgValue != 10) {                   // print end of line if showing process
+                    printf("\n");
+            }
 
             free(base10FractionalN);                                            // free the fractional base 10 intermediate result
 
