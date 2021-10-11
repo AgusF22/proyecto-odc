@@ -126,7 +126,7 @@ void parseBase(const int* base, int* baseArg, int* control){
 
 /**
 * @brief Checks if the given arguments are valid for the program.
-* @param argc The amount of arguments.
+* @param argc The number of arguments.
 * @param argv An array of strings, the arguments for the program execution.
 */
 void parseArguments(int* argc, char* argv[]){

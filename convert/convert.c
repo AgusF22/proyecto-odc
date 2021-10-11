@@ -12,7 +12,7 @@ int* sourceArgValue;            /**< @brief Pointer to integer, the value of the
 int* destArgValue;              /**< @brief Pointer to integer, the value of the destination base argument.*/
 
 /**
-* @brief Frees all the the global variables.
+* @brief Frees all the global variables.
 */
 void freeAll(){
     free(helpArgPresent);
@@ -49,7 +49,7 @@ void showHelp(){
 
 /**
 * @brief Main function of the convert program.
-* @param argc Amount of arguments.
+* @param argc Number of arguments.
 * @param argv Array of strings, the arguments for the execution.
 */
 int main(int argc, char* argv[]){

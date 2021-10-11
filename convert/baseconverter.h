@@ -43,7 +43,7 @@ void digitValue(const char* num, int* output) {
 
 /**
 * @brief Verifies if the given number in base 10 is representable in the given base with a precision of 10.
-* @param num A pointer to a 64 bit integer, the number to check.
+* @param num A pointer to a 64-bit integer, the number to check.
 * @param baseDest A pointer to an integer, the base to check.
 * @return A pointer, pointing to 1 if the number is representable in the given base.
 * @return A pointer, pointing to 0 if the number is not representable in the given base.
@@ -66,7 +66,7 @@ int* isRepresentable(const long long* num, const int* baseDest) {
 * @param nInteger An array of char, representing a number coded in a base from 2 to 16.
 * @param sourceBase A pointer to integer, with value from 2 to 16, representing the base of the input number.
 * @param viewArgument A pointer to integer, with value 1 or 0, depending on if the intermediate calculations need to be shown on the console.
-* @return A pointer to a 64 bit integer, the input number converted to base 10.
+* @return A pointer to a 64-bit integer, the input number converted to base 10.
 * @note The returned pointer is allocated dynamically.
 */
 long long* integerMultiplicationMethod(const char* nInteger, const int* sourceBase, const int* viewArgument){
@@ -118,7 +118,7 @@ long long* integerMultiplicationMethod(const char* nInteger, const int* sourceBa
 /**
 * @brief Calculates a base change using the integer division method.
 * @details Division method for integers is used to change base operating in the source base, so it's used to change from base 10 to any base.
-* @param nInteger A pointer to a 64 bit integer, the base 10 number to convert.
+* @param nInteger A pointer to a 64-bit integer, the base 10 number to convert.
 * @param destBase A pointer to integer, with value from 2 to 16, representing the destination base for the conversion.
 * @param viewArgument A pointer to integer, with value 1 or 0, depending on if the intermediate calculations need to be shown on the console.
 * @return An array of characters, the input number converted to the given base.
@@ -207,7 +207,7 @@ char* integerDivisionMethod(long long* nInteger, const int* destBase, const int*
 * @param nFraction An array of char, representing a number coded in a base from 2 to 16.
 * @param sourceBase A pointer to integer, with value from 2 to 16, representing the base of the input number.
 * @param viewArgument A pointer to integer, with value 1 or 0, depending on if the intermediate calculations need to be shown on the console.
-* @return A pointer to a floating point number, the input number converted to base 10.
+* @return A pointer to a floating-point number, the input number converted to base 10.
 * @note The returned pointer is allocated dynamically.
 */
 float* fractionDivisionMethod(const char* nFraction, const int* sourceBase, const int* viewArgument) {
@@ -255,7 +255,7 @@ float* fractionDivisionMethod(const char* nFraction, const int* sourceBase, cons
 /**
 * @brief Calculates a base change using the fractional multiplication method.
 * @details Multiplication method for fractional numbers is used to change base operating in the source base, so it's used to change from base 10 to any base.
-* @param nFraction A pointer to a floating point number, the number to convert.
+* @param nFraction A pointer to a floating-point number, the number to convert.
 * @param destBase A pointer to integer, with value from 2 to 16, representing the destination base for the conversion.
 * @param viewArgument A pointer to integer, with value 1 or 0, depending on if the intermediate calculations need to be shown on the console.
 * @return  An array of characters, the input number converted to the given base.
