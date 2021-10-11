@@ -222,7 +222,14 @@ void parseArguments(int* argc, char* argv[]){
         if (unparsedN != NULL) {
             parseN(unparsedN, control);
         } else {
-            *control = EXIT_FAILURE;
+            free(i);
+            free(temp);
+            free(control);
+            free(argChar);
+            freeAll();
+            printf("Syntax error: missing number.\n");
+            printf("Use \"convert -h\" for help.\n");
+            exit(EXIT_FAILURE);
         }
     }
     if (*control == EXIT_FAILURE){

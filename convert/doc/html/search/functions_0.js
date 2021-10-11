@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['digitchar_0',['digitChar',['../baseconverter_8h.html#a18fc1e17c8a343aed2c9da90e809ac54',1,'baseconverter.h']]],
-  ['digitvalue_1',['digitValue',['../baseconverter_8h.html#a1d55d31b3c604e0ca8cfac7940d0fcf4',1,'baseconverter.h']]]
+  ['argtochar_0',['argToChar',['../argumentparser_8h.html#aa2fdf10a7afde010f9e0ba1617935380',1,'argumentparser.h']]]
 ];

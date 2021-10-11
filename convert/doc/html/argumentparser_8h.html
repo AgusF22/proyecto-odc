@@ -80,6 +80,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ab1ec03e2713c4461ff454a2c0e78f414"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#ab1ec03e2713c4461ff454a2c0e78f414">toUpperCase</a> (char *character)</td></tr>
 <tr class="memdesc:ab1ec03e2713c4461ff454a2c0e78f414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the given character to upper case.  <a href="argumentparser_8h.html#ab1ec03e2713c4461ff454a2c0e78f414">More...</a><br /></td></tr>
 <tr class="separator:ab1ec03e2713c4461ff454a2c0e78f414"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2fdf10a7afde010f9e0ba1617935380"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#aa2fdf10a7afde010f9e0ba1617935380">argToChar</a> (char *str, char *output)</td></tr>
+<tr class="memdesc:aa2fdf10a7afde010f9e0ba1617935380"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the identifier character for the given string in the given pointer.  <a href="argumentparser_8h.html#aa2fdf10a7afde010f9e0ba1617935380">More...</a><br /></td></tr>
+<tr class="separator:aa2fdf10a7afde010f9e0ba1617935380"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1233a8a7fffd4037a5477e5dc3df469e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#a1233a8a7fffd4037a5477e5dc3df469e">validateDigit</a> (const char *digit, const int *base, int *control)</td></tr>
 <tr class="memdesc:a1233a8a7fffd4037a5477e5dc3df469e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given character is a valid digit for a given base.  <a href="argumentparser_8h.html#a1233a8a7fffd4037a5477e5dc3df469e">More...</a><br /></td></tr>
 <tr class="separator:a1233a8a7fffd4037a5477e5dc3df469e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,6 +118,43 @@ Variables</h2></td></tr>
 <tr class="separator:a96bfeb19bdd85905b9ec03578bbc5dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="aa2fdf10a7afde010f9e0ba1617935380" name="aa2fdf10a7afde010f9e0ba1617935380"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2fdf10a7afde010f9e0ba1617935380">&#9670;&nbsp;</a></span>argToChar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void argToChar </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>output</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stores the identifier character for the given string in the given pointer. </p>
+<p >The identifier character is the second character of the argument, for the arguments of the form "-x", where x is any character. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>A string, the argument to check. Valid arguments are "-n", "-s", "-d", "-h", and "-v". </td></tr>
+    <tr><td class="paramname">output</td><td>A pointer to char, where the output will be stored. If the input argument is not valid, the output is a null character. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a91d6dcb4b4e4637a63aacf87b53132d0" name="a91d6dcb4b4e4637a63aacf87b53132d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a91d6dcb4b4e4637a63aacf87b53132d0">&#9670;&nbsp;</a></span>freeAll()</h2>
 
