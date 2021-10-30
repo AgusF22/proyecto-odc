@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['fractiondivisionmethod_0',['fractionDivisionMethod',['../baseconverter_8h.html#a94b78252bacc32a732b8279948f12295',1,'baseconverter.h']]],
-  ['fractionmultiplicationmethod_1',['fractionMultiplicationMethod',['../baseconverter_8h.html#a4fc53f15336afc59aba4d7949fc8bdd4',1,'baseconverter.h']]],
-  ['freeall_2',['freeAll',['../argumentparser_8h.html#a91d6dcb4b4e4637a63aacf87b53132d0',1,'freeAll():&#160;convert.c'],['../convert_8c.html#a91d6dcb4b4e4637a63aacf87b53132d0',1,'freeAll():&#160;convert.c']]]
+  ['fractiondivisionmethod_0',['fractionDivisionMethod',['../baseconverter_8c.html#a94b78252bacc32a732b8279948f12295',1,'fractionDivisionMethod(const char *nFraction, const int *sourceBase, const int *viewArgument):&#160;baseconverter.c'],['../baseconverter_8h.html#a94b78252bacc32a732b8279948f12295',1,'fractionDivisionMethod(const char *nFraction, const int *sourceBase, const int *viewArgument):&#160;baseconverter.c']]],
+  ['fractionmultiplicationmethod_1',['fractionMultiplicationMethod',['../baseconverter_8c.html#a4fc53f15336afc59aba4d7949fc8bdd4',1,'fractionMultiplicationMethod(float *nFraction, const int *destBase, const int *viewArgument):&#160;baseconverter.c'],['../baseconverter_8h.html#a4fc53f15336afc59aba4d7949fc8bdd4',1,'fractionMultiplicationMethod(float *nFraction, const int *destBase, const int *viewArgument):&#160;baseconverter.c']]],
+  ['freeall_2',['freeAll',['../argumentparser_8c.html#a91d6dcb4b4e4637a63aacf87b53132d0',1,'freeAll():&#160;convert.c'],['../argumentparser_8h.html#a91d6dcb4b4e4637a63aacf87b53132d0',1,'freeAll():&#160;convert.c'],['../baseconverter_8c.html#a91d6dcb4b4e4637a63aacf87b53132d0',1,'freeAll():&#160;convert.c'],['../convert_8c.html#a91d6dcb4b4e4637a63aacf87b53132d0',1,'freeAll():&#160;convert.c']]]
 ];

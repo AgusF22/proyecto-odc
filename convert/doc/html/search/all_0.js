@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['argtochar_0',['argToChar',['../argumentparser_8h.html#aa2fdf10a7afde010f9e0ba1617935380',1,'argumentparser.h']]],
-  ['argumentparser_2eh_1',['argumentparser.h',['../argumentparser_8h.html',1,'']]]
+  ['argtochar_0',['argToChar',['../argumentparser_8c.html#aa2fdf10a7afde010f9e0ba1617935380',1,'argToChar(char *str, char *output):&#160;argumentparser.c'],['../argumentparser_8h.html#aa2fdf10a7afde010f9e0ba1617935380',1,'argToChar(char *str, char *output):&#160;argumentparser.c']]],
+  ['argumentparser_2ec_1',['argumentparser.c',['../argumentparser_8c.html',1,'']]],
+  ['argumentparser_2eh_2',['argumentparser.h',['../argumentparser_8h.html',1,'']]]
 ];

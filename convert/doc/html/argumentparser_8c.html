@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Convert: argumentparser.h File Reference</title>
+<title>Convert: argumentparser.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,55 +66,56 @@ $(function() {
   <div class="summary">
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">argumentparser.h File Reference</div></div>
+  <div class="headertitle"><div class="title">argumentparser.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><a href="argumentparser_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a91d6dcb4b4e4637a63aacf87b53132d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#a91d6dcb4b4e4637a63aacf87b53132d0">freeAll</a> ()</td></tr>
-<tr class="memdesc:a91d6dcb4b4e4637a63aacf87b53132d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all global variables.  <a href="argumentparser_8h.html#a91d6dcb4b4e4637a63aacf87b53132d0">More...</a><br /></td></tr>
+<tr class="memitem:a91d6dcb4b4e4637a63aacf87b53132d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#a91d6dcb4b4e4637a63aacf87b53132d0">freeAll</a> ()</td></tr>
+<tr class="memdesc:a91d6dcb4b4e4637a63aacf87b53132d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all global variables.  <a href="argumentparser_8c.html#a91d6dcb4b4e4637a63aacf87b53132d0">More...</a><br /></td></tr>
 <tr class="separator:a91d6dcb4b4e4637a63aacf87b53132d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1ec03e2713c4461ff454a2c0e78f414"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#ab1ec03e2713c4461ff454a2c0e78f414">toUpperCase</a> (char *character)</td></tr>
-<tr class="memdesc:ab1ec03e2713c4461ff454a2c0e78f414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the given character to upper case.  <a href="argumentparser_8h.html#ab1ec03e2713c4461ff454a2c0e78f414">More...</a><br /></td></tr>
+<tr class="memitem:ab1ec03e2713c4461ff454a2c0e78f414"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#ab1ec03e2713c4461ff454a2c0e78f414">toUpperCase</a> (char *character)</td></tr>
+<tr class="memdesc:ab1ec03e2713c4461ff454a2c0e78f414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the given character to upper case.  <a href="argumentparser_8c.html#ab1ec03e2713c4461ff454a2c0e78f414">More...</a><br /></td></tr>
 <tr class="separator:ab1ec03e2713c4461ff454a2c0e78f414"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2fdf10a7afde010f9e0ba1617935380"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#aa2fdf10a7afde010f9e0ba1617935380">argToChar</a> (char *str, char *output)</td></tr>
-<tr class="memdesc:aa2fdf10a7afde010f9e0ba1617935380"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the identifier character for the given string in the given pointer.  <a href="argumentparser_8h.html#aa2fdf10a7afde010f9e0ba1617935380">More...</a><br /></td></tr>
+<tr class="memitem:aa2fdf10a7afde010f9e0ba1617935380"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#aa2fdf10a7afde010f9e0ba1617935380">argToChar</a> (char *str, char *output)</td></tr>
+<tr class="memdesc:aa2fdf10a7afde010f9e0ba1617935380"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the identifier character for the given string in the given pointer.  <a href="argumentparser_8c.html#aa2fdf10a7afde010f9e0ba1617935380">More...</a><br /></td></tr>
 <tr class="separator:aa2fdf10a7afde010f9e0ba1617935380"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1233a8a7fffd4037a5477e5dc3df469e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#a1233a8a7fffd4037a5477e5dc3df469e">validateDigit</a> (const char *digit, const int *base, int *control)</td></tr>
-<tr class="memdesc:a1233a8a7fffd4037a5477e5dc3df469e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given character is a valid digit for a given base.  <a href="argumentparser_8h.html#a1233a8a7fffd4037a5477e5dc3df469e">More...</a><br /></td></tr>
+<tr class="memitem:a1233a8a7fffd4037a5477e5dc3df469e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#a1233a8a7fffd4037a5477e5dc3df469e">validateDigit</a> (const char *digit, const int *base, int *control)</td></tr>
+<tr class="memdesc:a1233a8a7fffd4037a5477e5dc3df469e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given character is a valid digit for a given base.  <a href="argumentparser_8c.html#a1233a8a7fffd4037a5477e5dc3df469e">More...</a><br /></td></tr>
 <tr class="separator:a1233a8a7fffd4037a5477e5dc3df469e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26efc2143d27da7c7d5005ee2c2ddec5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#a26efc2143d27da7c7d5005ee2c2ddec5">parseN</a> (char *toParseNArg, int *control)</td></tr>
-<tr class="memdesc:a26efc2143d27da7c7d5005ee2c2ddec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given array is a valid number in the current source base argument value.  <a href="argumentparser_8h.html#a26efc2143d27da7c7d5005ee2c2ddec5">More...</a><br /></td></tr>
+<tr class="memitem:a26efc2143d27da7c7d5005ee2c2ddec5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#a26efc2143d27da7c7d5005ee2c2ddec5">parseN</a> (char *toParseNArg, int *control)</td></tr>
+<tr class="memdesc:a26efc2143d27da7c7d5005ee2c2ddec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given array is a valid number in the current source base argument value.  <a href="argumentparser_8c.html#a26efc2143d27da7c7d5005ee2c2ddec5">More...</a><br /></td></tr>
 <tr class="separator:a26efc2143d27da7c7d5005ee2c2ddec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7954f13dce5eaa0d4519d17e7b3d286"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#ae7954f13dce5eaa0d4519d17e7b3d286">parseBase</a> (const int *base, int *baseArg, int *control)</td></tr>
-<tr class="memdesc:ae7954f13dce5eaa0d4519d17e7b3d286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a given base is valid, and, if it is, stores it in the given pointer.  <a href="argumentparser_8h.html#ae7954f13dce5eaa0d4519d17e7b3d286">More...</a><br /></td></tr>
+<tr class="memitem:ae7954f13dce5eaa0d4519d17e7b3d286"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#ae7954f13dce5eaa0d4519d17e7b3d286">parseBase</a> (const int *base, int *baseArg, int *control)</td></tr>
+<tr class="memdesc:ae7954f13dce5eaa0d4519d17e7b3d286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a given base is valid, and, if it is, stores it in the given pointer.  <a href="argumentparser_8c.html#ae7954f13dce5eaa0d4519d17e7b3d286">More...</a><br /></td></tr>
 <tr class="separator:ae7954f13dce5eaa0d4519d17e7b3d286"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac277e4fd9eeadee94cf3014ee3ccc419"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#ac277e4fd9eeadee94cf3014ee3ccc419">parseArguments</a> (int *argc, char *argv[])</td></tr>
-<tr class="memdesc:ac277e4fd9eeadee94cf3014ee3ccc419"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given arguments are valid for the program.  <a href="argumentparser_8h.html#ac277e4fd9eeadee94cf3014ee3ccc419">More...</a><br /></td></tr>
+<tr class="memitem:ac277e4fd9eeadee94cf3014ee3ccc419"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#ac277e4fd9eeadee94cf3014ee3ccc419">parseArguments</a> (int *argc, char *argv[])</td></tr>
+<tr class="memdesc:ac277e4fd9eeadee94cf3014ee3ccc419"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given arguments are valid for the program.  <a href="argumentparser_8c.html#ac277e4fd9eeadee94cf3014ee3ccc419">More...</a><br /></td></tr>
 <tr class="separator:ac277e4fd9eeadee94cf3014ee3ccc419"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a8729a7b17cc946b0482471d39aa4901f"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#a8729a7b17cc946b0482471d39aa4901f">helpArgPresent</a></td></tr>
-<tr class="memdesc:a8729a7b17cc946b0482471d39aa4901f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to integer, to store 1 if the help argument is present, 0 if not.  <a href="argumentparser_8h.html#a8729a7b17cc946b0482471d39aa4901f">More...</a><br /></td></tr>
+<tr class="memitem:a8729a7b17cc946b0482471d39aa4901f"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#a8729a7b17cc946b0482471d39aa4901f">helpArgPresent</a></td></tr>
+<tr class="memdesc:a8729a7b17cc946b0482471d39aa4901f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to integer, to store 1 if the help argument is present, 0 if not.  <a href="argumentparser_8c.html#a8729a7b17cc946b0482471d39aa4901f">More...</a><br /></td></tr>
 <tr class="separator:a8729a7b17cc946b0482471d39aa4901f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad046ba5c4355659e65bf897901ee9bfb"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#ad046ba5c4355659e65bf897901ee9bfb">viewArgPresent</a></td></tr>
-<tr class="memdesc:ad046ba5c4355659e65bf897901ee9bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to integer, to store 1 if the view argument is present, 0 if not.  <a href="argumentparser_8h.html#ad046ba5c4355659e65bf897901ee9bfb">More...</a><br /></td></tr>
+<tr class="memitem:ad046ba5c4355659e65bf897901ee9bfb"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#ad046ba5c4355659e65bf897901ee9bfb">viewArgPresent</a></td></tr>
+<tr class="memdesc:ad046ba5c4355659e65bf897901ee9bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to integer, to store 1 if the view argument is present, 0 if not.  <a href="argumentparser_8c.html#ad046ba5c4355659e65bf897901ee9bfb">More...</a><br /></td></tr>
 <tr class="separator:ad046ba5c4355659e65bf897901ee9bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0113599220696ae1a2aeaf773a866579"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#a0113599220696ae1a2aeaf773a866579">numberArgIntegerValue</a></td></tr>
-<tr class="memdesc:a0113599220696ae1a2aeaf773a866579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Char array, the value of the integer part of the number argument.  <a href="argumentparser_8h.html#a0113599220696ae1a2aeaf773a866579">More...</a><br /></td></tr>
+<tr class="memitem:a0113599220696ae1a2aeaf773a866579"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#a0113599220696ae1a2aeaf773a866579">numberArgIntegerValue</a></td></tr>
+<tr class="memdesc:a0113599220696ae1a2aeaf773a866579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Char array, the value of the integer part of the number argument.  <a href="argumentparser_8c.html#a0113599220696ae1a2aeaf773a866579">More...</a><br /></td></tr>
 <tr class="separator:a0113599220696ae1a2aeaf773a866579"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a624665444681ed777e3ddf0a98baf17f"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#a624665444681ed777e3ddf0a98baf17f">numberArgFractionValue</a></td></tr>
-<tr class="memdesc:a624665444681ed777e3ddf0a98baf17f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Char array, the value of the fractional part of the number argument.  <a href="argumentparser_8h.html#a624665444681ed777e3ddf0a98baf17f">More...</a><br /></td></tr>
+<tr class="memitem:a624665444681ed777e3ddf0a98baf17f"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#a624665444681ed777e3ddf0a98baf17f">numberArgFractionValue</a></td></tr>
+<tr class="memdesc:a624665444681ed777e3ddf0a98baf17f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Char array, the value of the fractional part of the number argument.  <a href="argumentparser_8c.html#a624665444681ed777e3ddf0a98baf17f">More...</a><br /></td></tr>
 <tr class="separator:a624665444681ed777e3ddf0a98baf17f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37ed37fb312180beb5fed75e558d9291"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#a37ed37fb312180beb5fed75e558d9291">sourceArgValue</a></td></tr>
-<tr class="memdesc:a37ed37fb312180beb5fed75e558d9291"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to integer, the value of the source base argument.  <a href="argumentparser_8h.html#a37ed37fb312180beb5fed75e558d9291">More...</a><br /></td></tr>
+<tr class="memitem:a37ed37fb312180beb5fed75e558d9291"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#a37ed37fb312180beb5fed75e558d9291">sourceArgValue</a></td></tr>
+<tr class="memdesc:a37ed37fb312180beb5fed75e558d9291"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to integer, the value of the source base argument.  <a href="argumentparser_8c.html#a37ed37fb312180beb5fed75e558d9291">More...</a><br /></td></tr>
 <tr class="separator:a37ed37fb312180beb5fed75e558d9291"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96bfeb19bdd85905b9ec03578bbc5dd2"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8h.html#a96bfeb19bdd85905b9ec03578bbc5dd2">destArgValue</a></td></tr>
-<tr class="memdesc:a96bfeb19bdd85905b9ec03578bbc5dd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to integer, the value of the destination base argument.  <a href="argumentparser_8h.html#a96bfeb19bdd85905b9ec03578bbc5dd2">More...</a><br /></td></tr>
+<tr class="memitem:a96bfeb19bdd85905b9ec03578bbc5dd2"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="argumentparser_8c.html#a96bfeb19bdd85905b9ec03578bbc5dd2">destArgValue</a></td></tr>
+<tr class="memdesc:a96bfeb19bdd85905b9ec03578bbc5dd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to integer, the value of the destination base argument.  <a href="argumentparser_8c.html#a96bfeb19bdd85905b9ec03578bbc5dd2">More...</a><br /></td></tr>
 <tr class="separator:a96bfeb19bdd85905b9ec03578bbc5dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
