@@ -50,9 +50,10 @@ void digitValue(const char* num, int* output) {
 * @note The returned pointer is allocated dynamically.
 */
 int* isRepresentable(const long long* num, const int* baseDest) {
-    int* toReturn = (int*) malloc(sizeof(int));
+    int* toReturn;
+    toReturn = (int*) malloc(sizeof(int));
 
-    if ( pow(*baseDest, 10) - 1 >= *num)                // If num is lower or equal to the maximum representable number in the given base with 10 precision digits
+    if ( pow(*baseDest, 10) - 1 >= *num)                    // If num is lower or equal to the maximum representable number in the given base with 10 precision digits
         *toReturn = 1;                                      // num is representable
     else
         *toReturn = 0;                                      // num is not representable
@@ -71,12 +72,19 @@ int* isRepresentable(const long long* num, const int* baseDest) {
 */
 long long* integerMultiplicationMethod(const char* nInteger, const int* sourceBase, const int* viewArgument){
 
-    long long* outcome = (long long*)malloc(sizeof(long long));             // Variable to store the outcome of this function
-    int* i = (int*) malloc(sizeof(int));                                    // Index for loops
-    int* nDigitValue = (int*) malloc(sizeof(int));                          // variable to store a digit from nInteger during nInteger traverse
-    int* position = (int*) malloc(sizeof(int));                             // Variable to store a position during nInteger traverse
-    long long* prevOutcome = (long long*) malloc(sizeof(long long));        // variable to store the outcome of the previous iteration during calculations
-    int* nIntegerLength = (int*) malloc(sizeof(int));                       // variable to store the length of nInteger
+    long long* outcome;                                                     // Variable to store the outcome of this function
+    int* i;                                                                 // Index for loops
+    int* nDigitValue;                                                       // variable to store a digit from nInteger during nInteger traverse
+    int* position;                                                          // Variable to store a position during nInteger traverse
+    long long* prevOutcome;                                                 // variable to store the outcome of the previous iteration during calculations
+    int* nIntegerLength;                                                    // variable to store the length of nInteger
+
+    outcome = (long long*)malloc(sizeof(long long));                        // ***********************
+    i = (int*) malloc(sizeof(int));                                         // ***********************
+    nDigitValue = (int*) malloc(sizeof(int));                               // Allocate dynamic memory
+    position = (int*) malloc(sizeof(int));                                  // ***********************
+    prevOutcome = (long long*) malloc(sizeof(long long));                   // ***********************
+    nIntegerLength = (int*) malloc(sizeof(int));                            // ***********************
 
     *outcome = 0;                                                           // By default, outcome is 0
     *nIntegerLength = 0;                                                    // By default, length is 0
@@ -112,9 +120,6 @@ long long* integerMultiplicationMethod(const char* nInteger, const int* sourceBa
     return outcome;
 }
 
-/*
- * metodo de la division para enteros (de base 10 a base destBase)
-*/
 /**
 * @brief Calculates a base change using the integer division method.
 * @details Division method for integers is used to change base operating in the source base, so it's used to change from base 10 to any base.
@@ -126,7 +131,26 @@ long long* integerMultiplicationMethod(const char* nInteger, const int* sourceBa
 */
 char* integerDivisionMethod(long long* nInteger, const int* destBase, const int* viewArgument){
 
-    int* representable = (int*) malloc(sizeof(int));                        // Pointer to store the condition of whether the given number is representable or not
+    int* representable;                                                     // Pointer to store the condition of whether the given number is representable or not
+    long long* nIntegerCopy;                                                // Pointer to store a copy of nInteger
+    char* outcome;                                                          // Pointer to store the outcome of this function (as it should be returned)
+    char* invertedOutcome;                                                  // Pointer to store the outcome of this function in inverted order (as the method generates it)
+    int* i;                                                                 // Index for loops
+    int* j;                                                                 // Index for loops
+    double* quotient;                                                       // Pointer to store the quotient of a division
+    int* rest;                                                              // Pointer to store the remainder of a division
+    int* nIntegerLength;                                                    // Pointer to store the length (digit amount) of nInteger
+
+    representable = (int*) malloc(sizeof(int));                             // ***********************
+    nIntegerCopy = (long long*) malloc(sizeof(long long));                  // ***********************
+    outcome = (char*) malloc(sizeof(char) * 10);                            // ***********************
+    i = (int*) malloc(sizeof(int));                                         // ***********************
+    j = (int*) malloc(sizeof(int));                                         // Allocate dynamic memory
+    quotient = (double*) malloc(sizeof(double));                            // ***********************
+    rest = (int*) malloc(sizeof(int));                                      // ***********************
+    nIntegerLength = (int*) malloc(sizeof(int));                            // ***********************
+    invertedOutcome = (char*) malloc(sizeof(char) * 10);                    // ***********************
+
     representable = isRepresentable(nInteger, destBase);                    // Verifies if the given number is representable in the given base with a precision of 10
     if(*representable == 0) {                                               // If number is not representable
         printf("Error: input number has more than 10 integer ");
@@ -137,15 +161,6 @@ char* integerDivisionMethod(long long* nInteger, const int* destBase, const int*
         exit(EXIT_FAILURE);                                                     //
     }
     free(representable);                                                    // Dispose of representable
-
-    long long* nIntegerCopy = (long long*) malloc(sizeof(long long));       // Pointer to store a copy of nInteger
-    char* outcome = (char*) malloc(sizeof(char) * 10);                      // Pointer to store the outcome of this function (as it should be returned)
-    char* invertedOutcome = (char*) malloc(sizeof(char) * 10);              // Pointer to store the outcome of this function in inverted order (as the method generates it)
-    int* i = (int*) malloc(sizeof(int));                                    // Index for loops
-    int* j = (int*) malloc(sizeof(int));                                    // Index for loops
-    double* quotient = (double*) malloc(sizeof(double));                    // Pointer to store the quotient of a division
-    int* rest = (int*) malloc(sizeof(int));                                 // Pointer to store the remainder of a division
-    int* nIntegerLength = (int*) malloc(sizeof(int));                       // Pointer to store the length (digit amount) of nInteger
 
     *nIntegerLength = 0;                                                    // Initialize length in 0
     *i = 0;                                                                 // Initialize index in 0
@@ -210,12 +225,19 @@ char* integerDivisionMethod(long long* nInteger, const int* destBase, const int*
 */
 float* fractionDivisionMethod(const char* nFraction, const int* sourceBase, const int* viewArgument) {
 
-    float* outcome = (float*)malloc(sizeof(float));                         // Pointer to store the outcome of this function
-    int* i = (int*) malloc(sizeof(int));                                    // Index for loops
-    char* digChar = (char*) malloc(sizeof(char));                           // pointer to store a character from nFraction
-    int* digValue = (int*) malloc(sizeof(int));                             // pointer to store the value of digChar in base 10
-    float* quotient = (float*) malloc(sizeof(float));                       // pointer to store the quotient of a division
-    int* length = (int*) malloc(sizeof(int));                               // pointer to store the length of nFraction
+    float* outcome;                                                         // Pointer to store the outcome of this function
+    int* i;                                                                 // Index for loops
+    char* digChar;                                                          // pointer to store a character from nFraction
+    int* digValue;                                                          // pointer to store the value of digChar in base 10
+    float* quotient;                                                        // pointer to store the quotient of a division
+    int* length;                                                            // pointer to store the length of nFraction
+
+    outcome = (float*)malloc(sizeof(float));                                // ***********************
+    i = (int*) malloc(sizeof(int));                                         // ***********************
+    digChar = (char*) malloc(sizeof(char));                                 // Allocate dynamic memory
+    digValue = (int*) malloc(sizeof(int));                                  // ***********************
+    quotient = (float*) malloc(sizeof(float));                              // ***********************
+    length = (int*) malloc(sizeof(int));                                    // ***********************
 
     *quotient = 0;                                                          // ***************
     *outcome = 0;                                                           // Initialize in 0
@@ -262,10 +284,15 @@ float* fractionDivisionMethod(const char* nFraction, const int* sourceBase, cons
 */
 char* fractionMultiplicationMethod(float* nFraction, const int* destBase, const int* viewArgument){
 
-    char* outcome = (char*)malloc(sizeof(char) * 5);                        // Pointer to store the outcome of this function
-    int* i = (int*) malloc(sizeof(int));                                    // Index for loops
-    float* product = (float*) malloc(sizeof(float));                        // Pointer to store a product
-    int* truncated = (int*) malloc(sizeof(int));                            // Pointer to store an integer
+    char* outcome;                                                          // Pointer to store the outcome of this function
+    int* i;                                                                 // Index for loops
+    float* product;                                                         // Pointer to store a product
+    int* truncated;                                                         // Pointer to store an integer
+
+    outcome = (char*)malloc(sizeof(char) * 5);                              // ***********************
+    i = (int*) malloc(sizeof(int));                                         // Allocate dynamic memory
+    product = (float*) malloc(sizeof(float));                               // ***********************
+    truncated = (int*) malloc(sizeof(int));                                 // ***********************
 
     if (*viewArgument == 1 && *destBase != 10) {                            // if viewArgument is true and destination base is not 10
         printf("Start fractional multiplication method\n");                     // inform start of this function calculations

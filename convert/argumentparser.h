@@ -50,7 +50,8 @@ void argToChar(char* str, char* output){
 * @attention Calling this procedure with base outside range [2, 16] is undefined behavior.
 */
 void validateDigit(const char* digit, const int* base, int* control){
-    int* code = (int*) malloc(sizeof(int));             // The digit's ASCII code
+    int* code;                                         // The digit's ASCII code
+    code = (int*) malloc(sizeof(int));                 // Allocate dynamic memory
     *code = (int)*digit;
 
     /*
@@ -79,11 +80,18 @@ void validateDigit(const char* digit, const int* base, int* control){
 */
 void parseN(char* toParseNArg, int* control){
 
-    int* length = (int*) malloc(sizeof(int));                           // Variable for the length of the string to parse
-    int* i = (int*) malloc(sizeof(int));                                // index for loops
-    int* counter = (int*) malloc(sizeof(int));                          // counter for array writing
-    int* foundPoint = (int*) malloc(sizeof(int));                       // condition for fraction point found
-    char* nArg = numberArgIntegerValue;                                 // n argument value storage pointer (to separate integer and fraction parts)
+    int* length;                                                        // Variable for the length of the string to parse
+    int* i;                                                             // index for loops
+    int* counter;                                                       // counter for array writing
+    int* foundPoint;                                                    // condition for fraction point found
+    char* nArg;                                                         // n argument value storage pointer (to separate integer and fraction parts)
+
+
+    length = (int*) malloc(sizeof(int));                                // ***********************
+    i = (int*) malloc(sizeof(int));                                     // ***********************
+    counter = (int*) malloc(sizeof(int));                               // Allocate dynamic memory
+    foundPoint = (int*) malloc(sizeof(int));                            // ***********************
+    nArg = numberArgIntegerValue;                                       // ***********************
 
     *length = 0;                                                        // Start with length equal 0
     while(toParseNArg[*length] != '\0'){                                // Traverse string until null character
@@ -141,11 +149,17 @@ void parseBase(const int* base, int* baseArg, int* control){
 * @param argv An array of strings, the arguments for the program execution.
 */
 void parseArguments(int* argc, char* argv[]){
-    int* i = (int*) malloc(sizeof(int));                                // Index for loops
-    int* temp = (int*) malloc(sizeof(int));                             // Variable to store base string to int conversion
-    int* control = (int*) malloc(sizeof(int));                          // Error control variable
-    char* unparsedN = NULL;                                             // -n argument value variable, starts with null
-    char* argChar = (char*) malloc(sizeof(char));                       // An identifier character for argument comparison
+    int* i;                                                             // Index for loops
+    int* temp;                                                          // Variable to store base string to int conversion
+    int* control;                                                       // Error control variable
+    char* unparsedN;                                                    // -n argument value variable
+    char* argChar;                                                      // An identifier character for argument comparison
+
+    i = (int*) malloc(sizeof(int));                                     // ***********************
+    temp = (int*) malloc(sizeof(int));                                  // Allocate dynamic memory
+    control = (int*) malloc(sizeof(int));                               // ***********************
+    argChar = (char*) malloc(sizeof(char));                             // ***********************
+    unparsedN = NULL;                                                   // Starts with null
 
     numberArgIntegerValue[0] = '\0';                                    // by default, n integer part is empty
     numberArgFractionValue[0] = '\0';                                   // by default, n fractional part is empty
