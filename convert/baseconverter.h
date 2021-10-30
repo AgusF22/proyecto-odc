@@ -93,7 +93,7 @@ long long* integerMultiplicationMethod(const char* nInteger, const int* sourceBa
         ++(*nIntegerLength);                                                    // increment length
     }
 
-    if (*viewArgument == 1) {                                               // if viewArgument is true
+    if (*viewArgument == 1 && *sourceBase != 10) {                          // if viewArgument is true and source base is not 10
         printf("Start integer multiplication method\n");                        // inform start of this function calculations
     }
 
@@ -104,7 +104,7 @@ long long* integerMultiplicationMethod(const char* nInteger, const int* sourceBa
         *position = (*nIntegerLength - 1) - *i;                                 // Store the position of the digit in the number, that is, counting from right to left
         *outcome += (*nDigitValue) * pow(*sourceBase, *position);               // Multiply the value of the digit, by the base to the power of the digit's position
 
-        if (*viewArgument == 1) {                                               // if viewArgument is true
+        if (*viewArgument == 1 && *sourceBase != 10) {                      // if viewArgument is true and source base is not 10
             printf("%10I64d + (%2d * %d^%2d) = %I64d\n",                            // print the current iteration status
                    *prevOutcome, *nDigitValue,
                    *sourceBase, *position, *outcome);
@@ -247,7 +247,7 @@ float* fractionDivisionMethod(const char* nFraction, const int* sourceBase, cons
         ++(*length);                                                            // increment length
     }
 
-    if (*viewArgument == 1) {                                               // if viewArgument is true
+    if (*viewArgument == 1 && *sourceBase != 10) {                          // if viewArgument is true and source base is not 10
         printf("Start fractional division method\n");                           // inform start of this function calculations
     }
 
@@ -256,7 +256,7 @@ float* fractionDivisionMethod(const char* nFraction, const int* sourceBase, cons
         digitValue(digChar, digValue);                                          // get the character's value in base 10
         *quotient = (*quotient + *digValue) / *sourceBase;                      // Add the quotient and the character's value, then divide by the source base
 
-        if (*viewArgument == 1) {                                               // if viewArgument is true
+        if (*viewArgument == 1 && *sourceBase != 10) {                      // if viewArgument is true and source base is not 10
             printf("(%.5f + %d) / 10 = %.5f\n",                                     // print the current iteration status
                    *outcome, *digValue, *quotient);
         }

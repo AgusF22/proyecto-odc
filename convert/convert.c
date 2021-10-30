@@ -12,7 +12,7 @@ int* sourceArgValue;            /**< @brief Pointer to integer, the value of the
 int* destArgValue;              /**< @brief Pointer to integer, the value of the destination base argument.*/
 
 /**
-* @brief Frees all the global variables.
+* @brief Frees all global variables.
 */
 void freeAll(){
     free(helpArgPresent);
@@ -48,7 +48,7 @@ void showHelp(){
 }
 
 /**
-* @brief Main function of the convert program.
+* @brief Program's main function.
 * @param argc Number of arguments.
 * @param argv Array of strings, the arguments for the execution.
 */
@@ -78,14 +78,16 @@ int main(int argc, char* argv[]){
                 integerMultiplicationMethod(numberArgIntegerValue,              // convert the integer part to base 10
                                             sourceArgValue, viewArgPresent);    // ***********************************
 
-            if(*viewArgPresent == 1) printf("\n");                              // print end of line if showing process
+            if (*viewArgPresent == 1 && *sourceArgValue != 10) {                // print end of line if showing process
+                printf("\n");
+            }
 
             convertedIntegerN =                                                 // ****************************************
                 integerDivisionMethod(base10IntegerN,                           // convert integer part to destination base
                                       destArgValue, viewArgPresent);            // ****************************************
 
             if(*viewArgPresent == 1 && *destArgValue != 10) {                   // print end of line if showing process
-                    printf("\n");
+                printf("\n");
             }
 
             free(base10IntegerN);                                               // free the integer base 10 intermediate result
@@ -94,14 +96,16 @@ int main(int argc, char* argv[]){
                 fractionDivisionMethod(numberArgFractionValue,                  // convert the fractional part to base 10
                                        sourceArgValue, viewArgPresent);         // **************************************
 
-            if(*viewArgPresent == 1) printf("\n");                              // print end of line if showing process
+            if (*viewArgPresent == 1 && *sourceArgValue != 10) {                // print end of line if showing process
+                printf("\n");
+            }
 
             convertedFractionalN =                                              // *******************************************
                 fractionMultiplicationMethod(base10FractionalN,                 // convert fractional part to destination base
                                              destArgValue, viewArgPresent);     // *******************************************
 
             if(*viewArgPresent == 1 && *destArgValue != 10) {                   // print end of line if showing process
-                    printf("\n");
+                printf("\n");
             }
 
             free(base10FractionalN);                                            // free the fractional base 10 intermediate result

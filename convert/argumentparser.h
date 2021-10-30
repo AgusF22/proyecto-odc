@@ -66,7 +66,7 @@ void validateDigit(const char* digit, const int* base, int* control){
         *control = EXIT_FAILURE;                        // If code is not in any case, means digit is not in 0 to 9 or a/A to f/F range
     }
 
-    if(*code > *base){                                  // If converted ASCII code is higher than base, means the digit is not used in the base
+    if(*code >= *base){                                  // If converted ASCII code is higher than base, means the digit is not used in the base
         *control = EXIT_FAILURE;                            // So, inform failure
     }
 
