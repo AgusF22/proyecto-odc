@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 extern int* helpArgPresent;
 extern int* viewArgPresent;
@@ -11,22 +12,12 @@ extern int* destArgValue;
 
 extern void freeAll();
 
-/**
-* @brief Converts the given character to upper case.
-* @brief A pointer to the character to convert.
-*/
 void toUpperCase(char* character){
     if (*character >= 97 && *character <= 122){
         *character = *character - 32;
     }
 }
 
-/**
-* @brief Stores the identifier character for the given string in the given pointer.
-* @details The identifier character is the second character of the argument, for the arguments of the form "-x", where x is any character.
-* @param str A string, the argument to check. Valid arguments are "-n", "-s", "-d", "-h", and "-v".
-* @param output A pointer to char, where the output will be stored. If the input argument is not valid, the output is a null character.
-*/
 void argToChar(char* str, char* output){
     if (str[0] == '-' && str[2] == '\0') {              // If first character is '-' and third character is the termination character
         switch (str[1]) {                                   // check second character
@@ -42,13 +33,6 @@ void argToChar(char* str, char* output){
     }
 }
 
-/**
-* @brief Checks if the given character is a valid digit for a given base.
-* @param digit A pointer to char, the character to check.
-* @param base A pointer to integer, pointing to a value in the range [2, 16], the base to check.
-* @param control A pointer to integer. This procedure will store EXIT_FAILURE on it if an error occurred.
-* @attention Calling this procedure with base outside range [2, 16] is undefined behavior.
-*/
 void validateDigit(const char* digit, const int* base, int* control){
     int* code;                                         // The digit's ASCII code
     code = (int*) malloc(sizeof(int));                 // Allocate dynamic memory
@@ -73,11 +57,6 @@ void validateDigit(const char* digit, const int* base, int* control){
     free(code);
 }
 
-/**
-* @brief Checks if the given array is a valid number in the current source base argument value.
-* @param toParseNArg The array to check.
-* @param control A pointer to integer. This procedure will store EXIT_FAILURE on it if an error occurred.
-*/
 void parseN(char* toParseNArg, int* control){
 
     int* length;                                                        // Variable for the length of the string to parse
@@ -114,25 +93,24 @@ void parseN(char* toParseNArg, int* control){
         }
     }
 
-    if(numberArgFractionValue[0] == '\0'){                              // If fraction part of n is empty
-        for(*i = 0; *i < 5; (*i)++){                                        // fill with 5 zeros
+    if (numberArgFractionValue[0] == '\0'){                             // If fraction part of n is empty
+        for (*i = 0; *i < 5; (*i)++){                                       // fill with 5 zeros
             numberArgFractionValue[*i] = '0';
         }
         numberArgFractionValue[*i] = '\0';                                  // add termination character
     }
 
-    free(length);
-    free(i);
-    free(counter);
-    free(foundPoint);
+    if (strlen(numberArgIntegerValue) > 10 ||
+        strlen(numberArgFractionValue) > 5){                            // If integer or fractional part exceeds limits
+        *control = EXIT_FAILURE;                                            // set control to error
+    }
+
+    free(length);                                                       // *******************
+    free(i);                                                            // free dynamic memory
+    free(counter);                                                      // *******************
+    free(foundPoint);                                                   // *******************
 }
 
-/**
-* @brief Checks if a given base is valid, and, if it is, stores it in the given pointer.
-* @param base A pointer to integer, the base to check.
-* @param baseArg A pointer to integer, pointing to the memory address in which, in case of being valid, the base will be stored.
-* @param control A pointer to integer. This procedure will store EXIT_FAILURE on it if an error occurred.
-*/
 void parseBase(const int* base, int* baseArg, int* control){
 
     if(*base < 2 || *base > 16){            // Valid bases are in the range [2, 16], so if outside that range
@@ -142,11 +120,6 @@ void parseBase(const int* base, int* baseArg, int* control){
 
 }
 
-/**
-* @brief Checks if the given arguments are valid for the program.
-* @param argc The number of arguments.
-* @param argv An array of strings, the arguments for the program execution.
-*/
 void parseArguments(int* argc, char* argv[]){
     int* i;                                                             // Index for loops
     int* temp;                                                          // Variable to store base string to int conversion
