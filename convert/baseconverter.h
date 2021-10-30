@@ -1,8 +1,6 @@
 #ifndef BASECONVERTER_H
 #define BASECONVERTER_H
 
-#include<math.h>
-
 /**
 * @brief Stores the character that represents the given value in the output pointer.
 * @param num A pointer to an integer number between 0 and 15.
